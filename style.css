@@ -16,6 +16,14 @@ header {
     background-color: rgb(211, 211, 211);
 }
 
+h1 {
+    font-family: "Playfair Display", serif;
+}
+
+p {
+    font-family: "Lora", serif;
+}
+
 a {
     text-decoration: none;
     color: black;
@@ -30,7 +38,7 @@ ul {
 }
 
 .ctnr {
-    width: 90%;
+    width: 85%;
     /* May change later */
     max-width: 1200px;
     margin: 0 auto;
@@ -65,4 +73,29 @@ ul {
 
 .nav__link {
     padding: 0.5rem 0;
+}
+
+.hero {
+    background-image: url("img/hero.jpeg");
+    background-position: 65% 30%;
+    padding: 7rem 0;
+}
+
+.hero__title {
+    font-size: 2rem;
+}
+
+.hero__text {
+    font-size: 1.1rem;
+}
+
+.hero__link {
+    background-color: orange;
+    padding: 1rem 2.5rem;
+    color: white;
+    font-size: 0.90rem;
+}
+
+.hero__ctnr {
+    width: 75%;
 }
