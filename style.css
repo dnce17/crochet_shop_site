@@ -1,0 +1,68 @@
+html {
+    box-sizing: border-box;
+}
+
+*, *::before, *::after {
+    box-sizing: inherit;
+}
+
+body {
+    margin: 0;
+    font-family: "Montserrat", sans-serif;
+}
+
+header {
+    /* Placeholder color - will delete later */
+    background-color: rgb(211, 211, 211);
+}
+
+a {
+    text-decoration: none;
+    color: black;
+
+    /* Prevents it from ignoring certain margin properties  */
+    display: inline-block;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.ctnr {
+    width: 90%;
+    /* May change later */
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.navbar {
+    text-align: center;
+}
+
+.navbar__items {
+    position: relative;  
+}
+
+.nav__toggle {
+    background-color: black;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 5px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.logo__img {
+    width: 5rem;
+}
+
+.nav__list {
+    border: 2px solid green;
+    margin: 0;
+}
+
+.nav__link {
+    padding: 0.5rem 0;
+}
