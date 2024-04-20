@@ -17,6 +17,7 @@ header {
 }
 
 h1 {
+    margin: 0;
     font-family: "Playfair Display", serif;
 }
 
@@ -42,6 +43,21 @@ ul {
     /* May change later */
     max-width: 1200px;
     margin: 0 auto;
+}
+
+.title {
+    font-size: 2rem;
+}
+
+.text {
+    font-size: 1.1rem;
+}
+
+.link {
+    background-color: orange;
+    padding: 1rem 2.5rem;
+    color: white;
+    font-size: 0.90rem;
 }
 
 .navbar {
@@ -75,27 +91,21 @@ ul {
     padding: 0.5rem 0;
 }
 
+.hero__ctnr {
+    width: 75%;
+}
+
 .hero {
     background-image: url("img/hero.jpeg");
     background-position: 65% 30%;
     padding: 7rem 0;
 }
 
-.hero__title {
-    font-size: 2rem;
-}
-
-.hero__text {
-    font-size: 1.1rem;
-}
-
-.hero__link {
-    background-color: orange;
-    padding: 1rem 2.5rem;
+.custom {
+    background-color: rgb(247, 247, 247);
+    background-image: url("img/custom.png");
+    padding: 10rem 0;
+    background-position: center 30%;
     color: white;
-    font-size: 0.90rem;
-}
-
-.hero__ctnr {
-    width: 75%;
+    text-align: center;
 }
