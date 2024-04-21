@@ -17,8 +17,11 @@ header {
 }
 
 h1 {
-    margin: 0;
     font-family: "Playfair Display", serif;
+}
+
+h1, h4 {
+    margin: 0;
 }
 
 p {
@@ -108,4 +111,27 @@ ul {
     background-position: center 30%;
     color: white;
     text-align: center;
+}
+
+.footer {
+    font-size: 0.80rem;
+    padding: 1rem;
+}
+
+.footer__nav {
+    padding: 0.5rem;
+}
+
+.footer__link {
+    margin-top: 0.5rem;
+}
+
+.copyright {
+    font-weight: normal;
+    text-align: center;
+}
+
+.credit-cards {
+    display: block;
+    margin: 0 auto;
 }
