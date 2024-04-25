@@ -21,6 +21,7 @@ h1, h2, h4 {
 
 p {
     font-family: "Lora", serif;
+    margin: 0;
 }
 
 img {
@@ -49,10 +50,12 @@ ul {
 
 .title {
     font-size: 2rem;
+    font-weight: 400;
 }
 
 .text {
     font-size: 1.1rem;
+    padding: 1rem 0;
 }
 
 .link {
@@ -102,17 +105,23 @@ ul {
 
 .hero__ctnr {
     width: 75%;
+    max-width: 650px;
 }
 
 .hero {
     background-image: url("img/hero.jpeg");
-    background-position: 65% 30%;
+    background-position: 65% 45%;
     padding: 9rem 0;
+}
+
+.hero__text {
+    color: #6D6A6A;
 }
 
 .custom-info {
     text-align: center;
-    padding: 3rem 0;
+    padding: 6rem 0;
+    background-color: rgb(247, 247, 247);
 }
 
 .custom-info__item-holder {
@@ -141,6 +150,7 @@ ul {
     margin: 0 auto;
     padding-top: 1rem;
     text-align: left;
+    color: #6D6A6A;
 }
 
 .custom {
@@ -153,13 +163,13 @@ ul {
 }
 
 .custom__text {
-    max-width: 470px;
-    border: 2px soldi 
+    max-width: 550px;
+    margin: 0 auto;
 }
 
 .footer {
     font-size: 0.80rem;
-    padding: 1rem;
+    padding: 3rem;
 }
 
 .footer__nav {
@@ -173,6 +183,7 @@ ul {
 .copyright {
     font-weight: normal;
     text-align: center;
+    padding-top: 1.5rem;
 }
 
 .credit-cards {
@@ -210,4 +221,61 @@ ul {
     padding: 0.25em 0.75em;
     background-color: rgb(255, 191, 72);
     font-weight: 500;
+}
+
+
+
+@media (min-width: 800px) {
+    .link {
+        font-size: 1.1rem;
+    }
+    
+    .hero {
+        padding: 11rem 0;
+    }
+
+    .hero__title {
+        font-size: 2.6rem;
+    }
+
+    .hero__text {
+        font-size: 1.2rem;
+    }
+
+    .custom-info__item-holder {
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: space-between;
+    }
+
+    .custom-info__title {
+        font-size: 2.25rem;
+    }
+
+    .custom-info__item {
+        /* on flex-items, this makes each item the same width */
+        width: 100%;
+    }
+
+    .custom-info__subtitle {
+        font-size: 1.75rem;
+    }
+
+    .custom-info__text {
+        text-align: center;
+        font-size: 1.063rem;
+    }
+
+    .custom__title {
+        font-size: 2.75rem;
+    }
+
+    .custom__text {
+        font-size: 1.25rem;
+    }
+
+    .footer__nav-ctnr {
+        display: flex;
+        justify-content: space-evenly;
+    }
 }
