@@ -6,7 +6,7 @@ html {
     box-sizing: inherit;
 }
 
-body {
+body, button {
     margin: 0;
     font-family: "Montserrat", sans-serif;
 }
@@ -15,7 +15,7 @@ h1 {
     font-family: "Playfair Display", serif;
 }
 
-h1, h4 {
+h1, h2, h4 {
     margin: 0;
 }
 
@@ -77,11 +77,11 @@ ul {
 }
 
 .nav__toggle-icon {
-    width: 2rem;
+    width: 1.7rem;
 }
 
 .logo__img {
-    width: 5rem;
+    width: 4rem;
     padding: 0.5rem 0;
 }
 
@@ -107,7 +107,7 @@ ul {
 .hero {
     background-image: url("img/hero.jpeg");
     background-position: 65% 30%;
-    padding: 7rem 0;
+    padding: 9rem 0;
 }
 
 .custom-info {
@@ -183,4 +183,31 @@ ul {
 
 .visible {
     display: block;
+}
+
+/* shop.html */
+.shop__display {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.5rem;
+    width: 90%;
+}
+
+.shop__item > * {
+    margin-top: 0.3rem;
+}
+
+.shop__img {
+    max-width: 100%;
+}
+
+.shop__img-title {
+    font-weight: normal;
+}
+
+.shop__cart-btn {
+    border: none;
+    padding: 0.25em 0.75em;
+    background-color: rgb(255, 191, 72);
+    font-weight: 500;
 }
