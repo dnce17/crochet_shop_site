@@ -223,11 +223,49 @@ ul {
     font-weight: 500;
 }
 
+@media (min-width: 600px) {
+    /* shop.html */
+    .shop__display {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
 
 
 @media (min-width: 800px) {
+    /* index.html */
     .link {
         font-size: 1.1rem;
+    }
+
+    .nav__toggle {
+        display: none;
+    }
+
+    .navbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        /* border: 2px solid green; */
+
+        /* The same as shop__display */
+        width: 90%;
+    }
+
+    .nav {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        /* border: 2px solid red; */
+    }
+    
+    .nav__list {
+        display: flex;
+        /* border: 2px solid pink; */
+    }
+
+    .nav__item {
+        margin-left: 2rem;
     }
     
     .hero {
@@ -277,5 +315,10 @@ ul {
     .footer__nav-ctnr {
         display: flex;
         justify-content: space-evenly;
+    }
+
+    /* shop.html */
+    .shop__display {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
     }
 }
