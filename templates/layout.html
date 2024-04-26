@@ -10,23 +10,23 @@
     <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
     <header>
         <div class="ctnr navbar">
             <div class="navbar__items">
                 <div class="nav__toggle">
-                    <img src="img/hamburger-icon.png" class="nav__toggle-icon" alt="hamburger icon toggle button">
+                    <img src="/static/img/hamburger-icon.png" class="nav__toggle-icon" alt="hamburger icon toggle button">
                 </div>
-                <a href="#" class="logo">
-                    <img src="img/logo.png" class="logo__img" alt="ball of yarn with crochet stick">
+                <a href="/" class="logo">
+                    <img src="/static/img/logo.png" class="logo__img" alt="ball of yarn with crochet stick">
                 </a>
             </div>
             <nav class="nav">
                 <ul class="nav__list nav__list--left">
-                    <li class="nav__item"><a href="index.html" class="nav__link">Home</a></li>
-                    <li class="nav__item"><a href="shop.html" class="nav__link">Shop</a></li>
+                    <li class="nav__item"><a href="/" class="nav__link">Home</a></li>
+                    <li class="nav__item"><a href="/shop" class="nav__link">Shop</a></li>
                 </ul>
                 <ul class="nav__list nav__list--right">
                     <li class="nav__item"><a href="#" class="nav__link">Cart</a></li>
@@ -34,44 +34,9 @@
             </nav>
         </div>
     </header>
-    <section class="hero">
-        <div class="ctnr">
-            <div class="hero__ctnr">
-                <h1 class="hero__title title">Handcrafted with love: Let's create together!</h1>
-                <p class="hero__text text">Browse our latest collection or request a custom creation tailored just for you!</p>
-                <a href="#" class="hero__link link">Shop</a>
-            </div>
-        </div>
-    </section>
-    <section class="custom-info">
-        <div class="ctnr">
-            <h1 class="custom-info__title title">How Custom Orders Work</h1>
-            <div class="custom-info__item-holder">
-                <div class="custom-info__item">
-                    <img src="img/computer-icon.png" class="custom-info__img" alt="computer icon">
-                    <h2 class="custom-info__subtitle">Discuss</h2>
-                    <p class="custom-info__text">Schedule a 1-to-1 online appt. with us to discuss your idea or send the link to an existing pattern you want us to make.</p>
-                </div>
-                <div class="custom-info__item">
-                    <img src="img/draft-icon.png" class="custom-info__img" alt="creating pattern draft icon">
-                    <h2 class="custom-info__subtitle">Draft</h2>
-                    <p class="custom-info__text">After the meeting, we follow up within a few days and show a draft pattern to ensure it is to your liking. Further discussion is done through email or online appointment, if desired.</p>
-                </div>
-                <div class="custom-info__item">
-                    <img src="img/delivery-truck-icon.png" class="custom-info__img" alt="fast delivery trunk">
-                    <h2 class="custom-info__subtitle">Finish</h2>
-                    <p class="custom-info__text">Once your item is finished, it will be shipped and a tracking number will be provided for you.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="custom">
-        <div class="ctnr">
-            <h1 class="custom__title title">Want something custom-made?</h1>
-            <p class="custom__text text">Have an idea? Found a pattern online you like? Have us make it for you!</p>
-            <a href="#" class="custom__link link">Request an order</a>
-        </div>
-    </section>
+
+    <main>{% block main %}{% endblock %}</main>
+
     <section class="footer">
         <div class="ctnr">
             <div class="footer__nav-ctnr">
@@ -101,10 +66,9 @@
                 </div>
             </div>
             <h5 class="copyright">© 2024 Random Crochet Company, All Rights Reserved</h5>
-            <img src="img/accepted-cards.png" class="credit-cards" alt="all credit cards accepted">
+            <img src="/static/img/accepted-cards.png" class="credit-cards" alt="all credit cards accepted">
         </div>
     </section>
 
-    <script src="index.js"></script>
+    <script src="/static/index.js"></script>
 </body>
-</html>
