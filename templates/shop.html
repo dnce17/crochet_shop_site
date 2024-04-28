@@ -3,7 +3,7 @@
 {% block main %}
 <main class="shop">
     <div class="ctnr shop__display">
-        {% for item in items %}
+        {% for item in items_on_pg %}
             <article class="shop__item">
                 <img src="{{ item.directory }}{{ item.path }}" class="shop__img" alt="{{ item.alt }}">
                 <h4 class="shop__img-title">{{ item.name }}</h4>
@@ -12,6 +12,43 @@
             </article>
         {% endfor %}
     </div>
+    <div class="shop__pages">
+        {% if pg > 1 %}
+            <a href="{{ url_for('shop', pg = pg - 1) }}" class="shop__pages-nav-item previous arrow">←</a>
+        {% else %}
+            <a href="{{ url_for('shop', pg = pg - 1) }}" class="shop__pages-nav-item previous arrow hidden">←</a>
+        {% endif %}
+
+        <!-- Show 5 pg options that's -2 and +2 from current page -->
+        {% if total_pg <= 5 %}
+            <!-- Show less than 5 pg options if total_pg <= 5 -->
+            {% for i in range(1, total_pg + 1) %}
+                <a href="{{ url_for('shop', pg = i) }}" class="shop__pages-nav-item pg-num">{{ i }}</a>
+            {% endfor %}
+        {% elif total_pg > 5 %}
+            {% if pg <= 3 %}
+                {% for i in range(1, 6) %}
+                    <a href="{{ url_for('shop', pg = i) }}" class="shop__pages-nav-item pg-num">{{ i }}</a>
+                {% endfor %}               
+            {% elif pg > 3 and pg <= total_pg - 2 %}
+                {% for i in range(pg - 2, pg + 3) %}
+                    <a href="{{ url_for('shop', pg = i) }}" class="shop__pages-nav-item pg-num">{{ i }}</a>
+                {% endfor %}
+            {% elif pg >= total_pg - 2 %}
+                {% for i in range(total_pg - 4, total_pg + 1) %}
+                    <a href="{{ url_for('shop', pg = i) }}" class="shop__pages-nav-item pg-num">{{ i }}</a>
+                {% endfor %}
+            {% endif %}
+        {% endif %}
+
+        
+        {% if pg < total_pg %}
+            <a href="{{ url_for('shop', pg = pg + 1) }}" class="shop__pages-nav-item next arrow">→</a>
+        {% else %}
+            <a href="{{ url_for('shop', pg = pg + 1) }}" class="shop__pages-nav-item next arrow hidden">→</a>
+        {% endif %}
+    </div>
 </main>
 {% endblock %}
+
 
