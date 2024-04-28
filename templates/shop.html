@@ -20,27 +20,28 @@
         {% endif %}
 
         <!-- Show 5 pg options that's -2 and +2 from current page -->
+        {% macro show_pg_num(start, end, page)%}
+            {% for i in range(start, end) %}
+                {% if page == i %}
+                    <a href="{{ url_for('shop', pg = i) }}" class="shop__pages-nav-item pg-num current">{{ i }}</a> 
+                {% else %}
+                    <a href="{{ url_for('shop', pg = i) }}" class="shop__pages-nav-item pg-num">{{ i }}</a>
+                {% endif %}
+            {% endfor %}
+        {% endmacro %}
+
         {% if total_pg <= 5 %}
             <!-- Show less than 5 pg options if total_pg <= 5 -->
-            {% for i in range(1, total_pg + 1) %}
-                <a href="{{ url_for('shop', pg = i) }}" class="shop__pages-nav-item pg-num">{{ i }}</a>
-            {% endfor %}
+            {{ show_pg_num(1, total_pg + 1, pg) }}
         {% elif total_pg > 5 %}
             {% if pg <= 3 %}
-                {% for i in range(1, 6) %}
-                    <a href="{{ url_for('shop', pg = i) }}" class="shop__pages-nav-item pg-num">{{ i }}</a>
-                {% endfor %}               
+                {{ show_pg_num(1, 6, pg) }}             
             {% elif pg > 3 and pg <= total_pg - 2 %}
-                {% for i in range(pg - 2, pg + 3) %}
-                    <a href="{{ url_for('shop', pg = i) }}" class="shop__pages-nav-item pg-num">{{ i }}</a>
-                {% endfor %}
+                {{ show_pg_num(pg - 2, pg + 3, pg) }}
             {% elif pg >= total_pg - 2 %}
-                {% for i in range(total_pg - 4, total_pg + 1) %}
-                    <a href="{{ url_for('shop', pg = i) }}" class="shop__pages-nav-item pg-num">{{ i }}</a>
-                {% endfor %}
+                {{ show_pg_num(total_pg - 4, total_pg + 1, pg) }}
             {% endif %}
         {% endif %}
-
         
         {% if pg < total_pg %}
             <a href="{{ url_for('shop', pg = pg + 1) }}" class="shop__pages-nav-item next arrow">→</a>
@@ -49,6 +50,4 @@
         {% endif %}
     </div>
 </main>
-{% endblock %}
-
-
+{% endblock %} 

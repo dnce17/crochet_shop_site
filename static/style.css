@@ -239,13 +239,18 @@ ul {
 }
 
 .pg-num {
-    background-color: rgb(247, 247, 247);
+    background-color: rgb(230, 227, 227);
     padding: 0.75em 0.75em;
+    font-weight: bold;
 }
 
 .arrow {
     font-size: 2rem;
-    background-color: rgb(247, 247, 247);
+    background-color: rgb(230, 227, 227);
+}
+
+.current {
+    border: 1px solid black;
 }
 
 .hidden {
