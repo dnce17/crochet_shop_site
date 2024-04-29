@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+
+{% block main %}
+    <form action="/admin/add-stock" method="post" enctype="multipart/form-data" class="inventory">
+        <label for="img" class="inventory__label">Item Image Upload (Ideal: 330x330)</label>
+        <input type="file" name="img" accept=".jpg, .jpeg, .png" class="inventory__input img-upload">
+        <img src="#" class="inventory__img img-preview hidden" alt="image preview">
+
+        <label for="name" class="inventory__label">Item Name</label>
+        <input type="text" name="name" class="inventory__input">
+        <label for="price" class="inventory__label">Price</label>
+        <input type="number" name="price" class="inventory__input" step="0.01">
+        <label for="stock" class="inventory__label">Stock</label>
+        <input type="number" name="stock" class="inventory__input">
+        <label for="alt" class="inventory__label">alt</label>
+        <input type="text" name="alt" class="inventory__input">
+
+        <input type="submit" value="Submit" class="inventory__input inventory__btn">
+    </form>
+{% endblock %}

@@ -257,6 +257,27 @@ ul {
     visibility: hidden;
 }
 
+/* add-stock.html */
+.inventory {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.inventory__label, .inventory__img, .inventory__btn {
+    margin-top: 1rem;
+}
+
+.inventory input[type=file] {
+    /* border: 1px solid green; */
+    margin-left: 5rem;
+}
+
+.img-preview {
+    width: 100%;
+    max-width: 330px;
+}
+
 
 
 @media (min-width: 600px) {
