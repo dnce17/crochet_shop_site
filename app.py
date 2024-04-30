@@ -20,7 +20,20 @@ def index():
 @app.route('/shop')
 def shop():
     items = load_shop(SHOP_CSV_PATH)
-    pg, total_pg, items_on_pg = paginate(items, 8)
+
+    # Placeholders used to show how shop.html looks; will leave in for display purposes
+    for _ in range(0, 100):
+        placeholder = {
+            'name': 'PLACEHOLDER', 
+            'price': '$??.??', 
+            'stock': '1', 
+            'directory': '', 
+            'path': 'https://placehold.co/330x330',
+            'alt': 'placeholder'
+        }
+        items.append(placeholder)
+
+    pg, total_pg, items_on_pg = paginate(items, 24)
 
     return render_template("shop.html", pg=pg, total_pg=total_pg, items_on_pg=items_on_pg)
 

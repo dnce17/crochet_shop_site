@@ -246,6 +246,7 @@ ul {
 
 .arrow {
     font-size: 2rem;
+    padding: 0 0.25em 0 0.25em;
     background-color: rgb(230, 227, 227);
 }
 

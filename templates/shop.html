@@ -14,9 +14,11 @@
     </div>
     <div class="shop__pages">
         {% if pg > 1 %}
-            <a href="{{ url_for('shop', pg = pg - 1) }}" class="shop__pages-nav-item previous arrow">←</a>
+            <a href="{{ url_for('shop', pg = 1) }}" class="shop__pages-nav-item previous arrow"><<</a>
+            <a href="{{ url_for('shop', pg = pg - 1) }}" class="shop__pages-nav-item previous arrow"><</a>
         {% else %}
-            <a href="{{ url_for('shop', pg = pg - 1) }}" class="shop__pages-nav-item previous arrow hidden">←</a>
+            <a href="{{ url_for('shop', pg = 1) }}" class="shop__pages-nav-item previous arrow hidden"><<</a>
+            <a href="{{ url_for('shop', pg = pg - 1) }}" class="shop__pages-nav-item previous arrow hidden"><</a>
         {% endif %}
 
         <!-- Show 5 pg options that's -2 and +2 from current page -->
@@ -44,9 +46,11 @@
         {% endif %}
         
         {% if pg < total_pg %}
-            <a href="{{ url_for('shop', pg = pg + 1) }}" class="shop__pages-nav-item next arrow">→</a>
+            <a href="{{ url_for('shop', pg = pg + 1) }}" class="shop__pages-nav-item next arrow">></a>
+            <a href="{{ url_for('shop', pg = total_pg) }}" class="shop__pages-nav-item next arrow">>></a>
         {% else %}
-            <a href="{{ url_for('shop', pg = pg + 1) }}" class="shop__pages-nav-item next arrow hidden">→</a>
+            <a href="{{ url_for('shop', pg = pg + 1) }}" class="shop__pages-nav-item next arrow hidden">></a>
+            <a href="{{ url_for('shop', pg = total_pg) }}" class="shop__pages-nav-item next arrow hidden">>></a>
         {% endif %}
     </div>
 </main>
