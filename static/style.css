@@ -279,6 +279,36 @@ ul {
     max-width: 330px;
 }
 
+/* register.html */
+.input {
+    border: none;
+    border-radius: 10px;
+    padding: 0.7rem 0.7rem;
+    width: 100%;
+    margin-top: 0.5rem;
+}
+
+.register-hero {
+    background-image: url("img/hero-2.png");
+    background-position: 75% 50%;
+    background-size: cover;
+    padding: 9rem 0;
+}
+
+.register {
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 1rem;
+    max-width: 450px;
+}
+
+.register__item {
+    margin-top: 1rem;
+}
+
+.register__item > * {
+    display: block;
+}
 
 
 @media (min-width: 600px) {

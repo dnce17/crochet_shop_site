@@ -9,3 +9,4 @@
 * https://www.reddit.com/r/Amigurumi/comments/u0702t/koromon_from_digimon_i_think_im_finally_getting/
 * https://www.pinterest.com/pin/457115430942991759/
 * https://www.1upcrochet.com/www1upcrochetcom/old-patterns//2018/02/digimon-gomamon-amigurumi-pattern.html
+* https://www.knitpro.eu/a/bamboo-crochet/en

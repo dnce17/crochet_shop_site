@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+
+{% block main %}
+<div class="register-hero">
+    <form action="/register" method="post" class="register ctnr">
+        <div class="register__item">
+            <h1 class="register__header">Register</h1>
+        </div>
+        <div class="register__item">
+            <label for="username">Username</label>
+            <input type="text" name="username" class="input register__username" id="username" autocomplete="off">
+        </div>
+        <div class="register__item">
+            <label for="email">Email</label>
+            <input type="text" name="email" class="input register__email" id="email" autocomplete="off">
+        </div>
+        <div class="register__item">
+            <label for="password">Password</label>
+            <input type="password" name="password" class="input register__password" id="password" autocomplete="off">
+        </div>
+        <div class="register__item">
+            <label for="confirm-password">Confirm Password</label>
+            <input type="password" name="confirm-password" class="input register__confirm" id="confirm-password" autocomplete="off">
+        </div>
+        <div class="register__item">
+            <input type="submit" name="register" class="register__submit">
+        </div>
+    </form>
+</div>
+{% endblock %} 

@@ -13,9 +13,11 @@ SHOP_CSV_FIELDNAMES = {
 
 app = Flask(__name__)
 
+
 @app.route("/", methods=["GET", "POST"])
 def index():
     return render_template("index.html")
+
 
 @app.route('/shop')
 def shop():
@@ -36,6 +38,7 @@ def shop():
     pg, total_pg, items_on_pg = paginate(items, 24)
 
     return render_template("shop.html", pg=pg, total_pg=total_pg, items_on_pg=items_on_pg)
+
 
 # Will consider making it only accessible by admin later on
 @app.route('/admin/add-stock', methods=["GET", "POST"])
@@ -58,3 +61,8 @@ def add():
         update_shop(SHOP_CSV_PATH, header_names, shop_info)    
 
     return render_template("add-stock.html")
+
+
+@app.route("/register", methods=["GET", "POST"])
+def register():
+    return render_template("register.html")
