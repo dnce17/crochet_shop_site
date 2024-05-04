@@ -2,28 +2,20 @@
 
 {% block main %}
 <div class="auth-hero">
-    <form action="/register" method="post" class="auth register ctnr">
+    <form action="/login" method="post" class="auth login ctnr">
         <div class="auth__header">
-            <h1>Register</h1>
+            <h1>Login</h1>
         </div>
         <div class="auth__item">
             <label for="username" class="auth__label">Username</label>
             <input type="text" name="username" class="input auth__username" id="username" autocomplete="off">
         </div>
         <div class="auth__item">
-            <label for="email" class="auth__label">Email</label>
-            <input type="text" name="email" class="input auth__email" id="email" autocomplete="off">
-        </div>
-        <div class="auth__item">
             <label for="password" class="auth__label">Password</label>
             <input type="password" name="password" class="input auth__password" id="password" autocomplete="off">
         </div>
         <div class="auth__item">
-            <label for="confirm-password" class="auth__label">Confirm Password</label>
-            <input type="password" name="confirm-password" class="input auth__confirm" id="confirm-password" autocomplete="off">
-        </div>
-        <div class="auth__item">
-            <input type="submit" name="register" class="input auth__submit">
+            <input type="submit" name="register" class="input auth__submit" value="Login">
         </div>
     </form>
 </div>

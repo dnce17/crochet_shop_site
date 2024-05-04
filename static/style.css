@@ -191,7 +191,6 @@ ul {
     margin: 0 auto;
 }
 
-
 .visible {
     display: block;
 }
@@ -288,26 +287,38 @@ ul {
     margin-top: 0.5rem;
 }
 
-.register-hero {
+.auth-hero {
     background-image: url("img/hero-2.png");
     background-position: 75% 50%;
     background-size: cover;
-    padding: 9rem 0;
+    min-height: 650px;
+    display: flex;
+    align-items: center;
+
+    /* padding: 9rem 0; */
 }
 
-.register {
+.auth {
     background-color: rgba(0, 0, 0, 0.7);
     color: white;
-    padding: 1rem;
+    padding: 2rem 2rem;
     max-width: 450px;
+    height: fit-content;
 }
 
-.register__item {
-    margin-top: 1rem;
+.auth__item {
+    margin-top: 1.5rem;
 }
 
-.register__item > * {
+.auth__item > * {
     display: block;
+}
+
+.auth__submit {
+    background-color: rgb(245, 219, 185);
+    font-size: 1rem;
+    font-weight: 600;
+    color: rgb(126, 125, 125)
 }
 
 
