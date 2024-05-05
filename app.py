@@ -1,5 +1,6 @@
-from flask import Flask, render_template, request
-from helpers import load_shop, paginate, process_inventory, update_shop, usd
+from flask import Flask, render_template, request, session
+from flask_socketio import SocketIO, emit
+from helpers import load_shop, paginate, process_inventory, update_shop, usd, validate_item
 
 SHOP_CSV_PATH = "static/shop.csv"
 SHOP_CSV_FIELDNAMES = {
@@ -12,6 +13,7 @@ SHOP_CSV_FIELDNAMES = {
 }
 
 app = Flask(__name__)
+socketio = SocketIO(app)
 
 
 @app.route("/", methods=["GET", "POST"])
@@ -21,6 +23,7 @@ def index():
 
 @app.route('/shop')
 def shop():
+    # Load shop items from CSV file
     items = load_shop(SHOP_CSV_PATH)
 
     # Placeholders used to show how shop.html looks; will leave in for display purposes
@@ -50,6 +53,16 @@ def cart():
     return render_template("cart.html")
 
 
+@app.route("/register", methods=["GET", "POST"])
+def register():
+    return render_template("register.html")
+
+
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    return render_template("login.html")
+
+
 # Will consider making it only accessible by admin later on
 @app.route('/admin/add-stock', methods=["GET", "POST"])
 def add():
@@ -73,11 +86,7 @@ def add():
     return render_template("add-stock.html")
 
 
-@app.route("/register", methods=["GET", "POST"])
-def register():
-    return render_template("register.html")
-
-
-@app.route("/login", methods=["GET", "POST"])
-def login():
-    return render_template("login.html")
+# flask-socketio
+@socketio.on("add to cart")
+def add_to_cart(data):
+    validate_item(SHOP_CSV_PATH, data)

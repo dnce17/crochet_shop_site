@@ -1,5 +1,7 @@
 function main() {
     toggleNav();
+
+    // MOVE FUNC to a add-stock.js
     previewImg()
 }
 
@@ -13,6 +15,7 @@ function toggleNav() {
     });
 }
 
+// MOVE FUNC to a add-stock.js
 function previewImg() {
     let imgUpload = document.querySelector(".img-upload");
     let imgPreview = document.querySelector(".img-preview")
@@ -25,7 +28,6 @@ function previewImg() {
                 imgPreview.classList.remove("hidden")
             }
         }
-        // imgPreview.src = `/static/img/shop${}`
     });
 }
 

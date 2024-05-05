@@ -1,9 +1,10 @@
 import csv
-from flask import request
+from flask import request, session
 
 def usd(value):
     """Format value as USD."""
     return f"${value:,.2f}"
+
 
 def load_shop(path):
     with open(path, "r", encoding='utf-8-sig') as f:
@@ -13,6 +14,7 @@ def load_shop(path):
             items_list.append(item)
 
         return items_list
+
 
 def paginate(items, per_pg):
     pg = request.args.get("pg", 1, type=int)
@@ -24,6 +26,7 @@ def paginate(items, per_pg):
     items_on_pg = items[start:end]
 
     return [pg, total_pg, items_on_pg]
+
 
 def process_inventory(img, inputs, shop_info):
     # Save img to folder
@@ -49,3 +52,18 @@ def update_shop(csv_path, header_names_arr, item_info_dict):
     with open(csv_path, "a", newline="") as f:
         writer = csv.DictWriter(f, fieldnames=header_names_arr)
         writer.writerow(item_info_dict)
+
+
+# Validate item before adding to cart
+def validate_item(path, item_name):
+    item_found = False
+
+    with open(path, "r", encoding='utf-8-sig') as f:
+        reader = csv.DictReader(f)
+        for item in reader:
+            if item_name.strip() == item["name"]:
+                print(item["name"])
+                item_found = True
+    
+    if item_found == True:
+        """"""
