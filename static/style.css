@@ -15,7 +15,7 @@ h1 {
     font-family: "Playfair Display", serif;
 }
 
-h1, h2, h4 {
+h1, h2, h3, h4 {
     margin: 0;
 }
 
@@ -63,6 +63,13 @@ ul {
     padding: 1rem 2.5rem;
     color: white;
     font-size: 0.90rem;
+}
+
+.none {
+    border: 1px solid #E8E8E8;
+    color: #6D6A6A;
+    text-align: center;
+    padding: 5rem 0;
 }
 
 .navbar {

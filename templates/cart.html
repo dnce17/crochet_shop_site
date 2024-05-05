@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+
+{% block main %}
+<div class="cart ctnr">
+    <h1>Cart</h1>
+    <section class="cart__products">
+        {% if not cart_items %}
+            <h3 class="none cart__none">No items in cart</h3>
+        {% endif %}
+    </section>
+</div>
+{% endblock %} 

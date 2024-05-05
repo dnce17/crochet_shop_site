@@ -40,6 +40,16 @@ def shop():
     return render_template("shop.html", pg=pg, total_pg=total_pg, items_on_pg=items_on_pg)
 
 
+@app.route("/order", methods=["GET", "POST"])
+def order():
+    return render_template("order.html")
+
+
+@app.route("/cart", methods=["GET", "POST"])
+def cart():
+    return render_template("cart.html")
+
+
 # Will consider making it only accessible by admin later on
 @app.route('/admin/add-stock', methods=["GET", "POST"])
 def add():
