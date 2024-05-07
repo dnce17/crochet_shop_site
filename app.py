@@ -1,5 +1,8 @@
 from flask import Flask, render_template, request, session
 from flask_socketio import SocketIO, emit
+from flask_session import Session
+import os
+from dotenv import load_dotenv
 from helpers import load_shop, paginate, process_inventory, update_shop, usd, validate_item
 
 SHOP_CSV_PATH = "static/shop.csv"
@@ -13,7 +16,17 @@ SHOP_CSV_FIELDNAMES = {
 }
 
 app = Flask(__name__)
-socketio = SocketIO(app)
+
+app.config["SESSION_PERMANENT"] = False
+app.config["SESSION_TYPE"] = "filesystem"
+Session(app)
+
+socketio = SocketIO(app, manage_session=False)
+
+# Load vars from .env file
+load_dotenv()
+SECRET_KEY = os.getenv("SECRET_KEY")
+app.secret_key = SECRET_KEY
 
 
 @app.route("/", methods=["GET", "POST"])
@@ -23,6 +36,13 @@ def index():
 
 @app.route('/shop')
 def shop():
+    # Create cart if does not exist
+    if "cart" not in session:
+        session["cart"] = []
+        print("New cart made")
+    
+    print(session["cart"])
+
     # Load shop items from CSV file
     items = load_shop(SHOP_CSV_PATH)
 
@@ -50,7 +70,15 @@ def order():
 
 @app.route("/cart", methods=["GET", "POST"])
 def cart():
-    return render_template("cart.html")
+    cart_items = session["cart"]
+    subtotal = 0
+
+    # Calculate subtotal of cart
+    if cart_items:
+        for item in cart_items:
+            subtotal += float(item["price"].replace("$", ""))
+        
+    return render_template("cart.html", cart_items=cart_items, subtotal=usd(subtotal))
 
 
 @app.route("/register", methods=["GET", "POST"])
@@ -89,4 +117,13 @@ def add():
 # flask-socketio
 @socketio.on("add to cart")
 def add_to_cart(data):
-    validate_item(SHOP_CSV_PATH, data)
+    item = validate_item(SHOP_CSV_PATH, data)
+    if item != "error":
+        session["cart"].append(item)
+
+        # Addresses  issue of arr items getting deleted upon refresh
+        # when appending to item using websocket
+        session["cart"] = session["cart"]
+        print(session["cart"])
+    else:
+        print("ADD LATER: create some error msg asking user to refresh page")

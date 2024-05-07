@@ -56,14 +56,16 @@ def update_shop(csv_path, header_names_arr, item_info_dict):
 
 # Validate item before adding to cart
 def validate_item(path, item_name):
-    item_found = False
+    item_info = None
 
     with open(path, "r", encoding='utf-8-sig') as f:
         reader = csv.DictReader(f)
         for item in reader:
             if item_name.strip() == item["name"]:
-                print(item["name"])
-                item_found = True
+                item_info = item
     
-    if item_found == True:
-        """"""
+    if item_info:
+        print("item located in db")
+        return item_info
+    else:
+        return "error"

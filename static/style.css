@@ -65,6 +65,10 @@ ul {
     font-size: 0.90rem;
 }
 
+.bold {
+    font-weight: bold;
+}
+
 .none {
     border: 1px solid #E8E8E8;
     color: #6D6A6A;
@@ -247,7 +251,6 @@ ul {
 .pg-num {
     background-color: rgb(230, 227, 227);
     padding: 0.75em 0.75em;
-    font-weight: bold;
 }
 
 .arrow {
@@ -327,6 +330,34 @@ ul {
     font-weight: 600;
     color: rgb(126, 125, 125)
 }
+
+/* cart.html */
+.cart {
+    width: 93%;
+}
+
+.cart__item {
+    /* border: 1px solid purple; */
+    display: grid;
+    grid-template-columns: 35% 45% 20%;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    text-align: center;
+}
+
+.cart__item-img {
+    max-width: 100%;
+}
+
+.checkout-btn {
+    background-color: #f34f3f;
+    color: white;
+    border: none;
+    padding: 1em 2em;
+    font-size: 1rem;
+    margin-top: 0.5rem;
+}
+
 
 
 @media (min-width: 600px) {

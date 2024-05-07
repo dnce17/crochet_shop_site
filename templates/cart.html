@@ -6,6 +6,32 @@
     <section class="cart__products">
         {% if not cart_items %}
             <h3 class="none cart__none">No items in cart</h3>
+        {% else %}
+            {% for item in cart_items %}
+                <article class="cart__item">
+                    <img src="{{ item.directory }}{{ item.path }}" class="col-left cart__item-img" alt="{{ item.alt }}">
+                    <div class="col-mid">
+                        <div class="cart__item-name bold">{{ item.name }}</div>
+                    </div>
+                    <div class="col-right">
+                        <div class="cart__item-price bold">{{ item.price }}</div>
+                        <div class="cart__item-qty">
+                            <label for="qty">Qty:</label>
+                            <select name="qty" id="qty">
+                                {% set stock = item.stock | int %}
+                                {% for i in range(0, stock + 1) %}
+                                    <option value="{{ i }}">{{ i }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                </article>
+                <hr>
+            {% endfor %}
+            <div class="cart__subtotal">
+                <h3 class="cart__subtotal-text">Subtotal: {{ subtotal }}</h3>
+                <input type="submit" class="checkout-btn bold" value="Proceed to checkout">
+            </div>
         {% endif %}
     </section>
 </div>

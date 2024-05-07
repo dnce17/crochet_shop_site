@@ -22,12 +22,12 @@
         {% endif %}
 
         <!-- Show 5 pg options that's -2 and +2 from current page -->
-        {% macro show_pg_num(start, end, page)%}
+        {% macro show_pg_num(start, end, page) %}
             {% for i in range(start, end) %}
                 {% if page == i %}
-                    <a href="{{ url_for('shop', pg = i) }}" class="shop__pages-nav-item pg-num current">{{ i }}</a> 
+                    <a href="{{ url_for('shop', pg = i) }}" class="shop__pages-nav-item pg-num current bold">{{ i }}</a> 
                 {% else %}
-                    <a href="{{ url_for('shop', pg = i) }}" class="shop__pages-nav-item pg-num">{{ i }}</a>
+                    <a href="{{ url_for('shop', pg = i) }}" class="shop__pages-nav-item pg-num bold">{{ i }}</a>
                 {% endif %}
             {% endfor %}
         {% endmacro %}
