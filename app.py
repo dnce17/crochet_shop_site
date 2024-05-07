@@ -121,19 +121,31 @@ def add_to_cart(data):
     item = validate_item(SHOP_CSV_PATH, data)
     if item != "error":
 
-        def check_dup_cart_items(item_in_db):
+        def check_stock(stock, current_qty):
+            """"Check if enough stock before adding to cart"""
+            if current_qty < stock:
+                return True
+
+            return False
+
+        def update_dup_cart_item_qty(item_in_db):
+            """"Update cart item qty rather than adding new item if duplicate"""
             for product in session["cart"]:
                 if item_in_db["name"] in product["name"]:
-                    qty = int(product["stock"])
-                    print("Qty: " + str(qty))
-                    product["stock"] = qty + 1
+                    current_qty, stock = int(product["stock"]), int(item_in_db["stock"])
 
-                    print("dup item found and updated")
-                    return True
+                    # Check if enough stock to add more qty
+                    if check_stock(stock, current_qty):
+                        product["stock"] = current_qty + 1
+
+                        print("dup item found and updated")
+                        return True
+                    else:
+                        print("not enough stock")
             
             return False
         
-        check_dup_cart_items(item)
+        update_dup_cart_item_qty(item)
 
         # TODO: apply this assuming the item has no dups in cart
         # session["cart"].append(item)

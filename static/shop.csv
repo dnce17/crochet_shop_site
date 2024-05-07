@@ -1,8 +1,8 @@
 ﻿name,price,stock,directory,path,alt
 Bunny Mushroom (Pink),$12.00 ,1,/static/,img/shop/mushroom-pink.jpg,cute bunny pink hat mushroom 
-Strawberry Mushroom,$12.00 ,1,/static/,img/shop/mushroom-red.jpg,cute strawberry hat mushroom
-White Octopus,$13.00 ,1,/static/,img/shop/octopus-white.jpg,white octopus
-Pikachu,$15.00 ,1,/static/,img/shop/pikachu.png,pikachu from pokemon series
+Strawberry Mushroom,$12.00 ,15,/static/,img/shop/mushroom-red.jpg,cute strawberry hat mushroom
+White Octopus,$13.00 ,7,/static/,img/shop/octopus-white.jpg,white octopus
+Pikachu,$15.00 ,6,/static/,img/shop/pikachu.png,pikachu from pokemon series
 Botamon,$16.00 ,1,/static/,img/shop/botamon.png,botamon from digimon series 
 Koromon,$20.00 ,1,/static/,img/shop/koromon.png,koromon from digimon series
 Terriermon,$21.00 ,1,/static/,img/shop/terriermon.png,terriermon from digimon series
