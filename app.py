@@ -17,7 +17,7 @@ SHOP_CSV_FIELDNAMES = {
 
 app = Flask(__name__)
 
-app.config["SESSION_PERMANENT"] = False
+app.config["SESSION_PERMANENT"] = True
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
@@ -70,15 +70,16 @@ def order():
 
 @app.route("/cart", methods=["GET", "POST"])
 def cart():
-    cart_items = session["cart"]
     subtotal = 0
 
     # Calculate subtotal of cart
-    if cart_items:
-        for item in cart_items:
+    if "cart" in session:
+        for item in session["cart"]:
             subtotal += float(item["price"].replace("$", ""))
-        
-    return render_template("cart.html", cart_items=cart_items, subtotal=usd(subtotal))
+            
+        return render_template("cart.html", cart_items=session["cart"], subtotal=usd(subtotal))
+    
+    return render_template("cart.html")
 
 
 @app.route("/register", methods=["GET", "POST"])
@@ -127,3 +128,25 @@ def add_to_cart(data):
         print(session["cart"])
     else:
         print("ADD LATER: create some error msg asking user to refresh page")
+
+
+
+@socketio.on("delete cart item")
+def delete_cart_item(data):
+    item = validate_item(SHOP_CSV_PATH, data["name"])
+    index = data["index"]
+
+    if item != "error":
+        session["cart"].remove(item)
+        session["cart"] = session["cart"]
+
+        print(session["cart"])
+        print(index)
+        emit("delete cart item", index)
+    else:
+        print("ADD LATER: create some error msg asking user to refresh page")
+
+
+
+if __name__ == '__main__':
+    socketio.run(app)

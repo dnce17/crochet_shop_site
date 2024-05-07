@@ -11,7 +11,7 @@ function toggleNav() {
 
     navToggle.addEventListener("click", () => {
         // console.log("test");
-        nav.classList.toggle("visible");
+        nav.classList.toggle("d-none");
     });
 }
 

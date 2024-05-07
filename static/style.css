@@ -69,6 +69,10 @@ ul {
     font-weight: bold;
 }
 
+.d-none {
+    display: none;
+}
+
 .none {
     border: 1px solid #E8E8E8;
     color: #6D6A6A;
@@ -97,10 +101,6 @@ ul {
 .logo__img {
     width: 4rem;
     padding: 0.5rem 0;
-}
-
-.nav {
-    display: none;
 }
 
 .nav__list {
@@ -200,10 +200,6 @@ ul {
 .credit-cards {
     display: block;
     margin: 0 auto;
-}
-
-.visible {
-    display: block;
 }
 
 /* shop.html */
@@ -349,7 +345,7 @@ ul {
     max-width: 100%;
 }
 
-.qty{
+.qty {
     background-color: rgb(247, 247, 247);
     padding: 0.3rem 0.5rem;
 }
@@ -378,6 +374,19 @@ ul {
     display: flex;
     justify-content: space-between;
 }
+
+.cart__item-col--mid {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.cart__item-delete-btn {
+    border: none;
+    background-color: white;
+    text-decoration: underline;
+}
+
 
 
 @media (min-width: 600px) {

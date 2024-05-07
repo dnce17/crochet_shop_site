@@ -12,3 +12,5 @@
 * https://www.knitpro.eu/a/bamboo-crochet/en
 * https://stackoverflow.com/questions/55793579/is-there-a-way-to-modify-a-flask-session-inside-a-flask-socketio-event
 * https://www.geeksforgeeks.org/how-to-use-flask-session-in-python-flask/
+* https://www.geeksforgeeks.org/how-to-align-an-element-to-bottom-with-flexbox-in-css/
+* https://stackoverflow.com/questions/3955229/remove-all-child-elements-of-a-dom-node-in-javascript
