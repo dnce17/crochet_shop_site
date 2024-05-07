@@ -120,7 +120,23 @@ def add():
 def add_to_cart(data):
     item = validate_item(SHOP_CSV_PATH, data)
     if item != "error":
-        session["cart"].append(item)
+
+        def check_dup_cart_items(item_in_db):
+            for product in session["cart"]:
+                if item_in_db["name"] in product["name"]:
+                    qty = int(product["stock"])
+                    print("Qty: " + str(qty))
+                    product["stock"] = qty + 1
+
+                    print("dup item found and updated")
+                    return True
+            
+            return False
+        
+        check_dup_cart_items(item)
+
+        # TODO: apply this assuming the item has no dups in cart
+        # session["cart"].append(item)
 
         # Addresses issue of arr items getting deleted upon refresh
         # when appending to item using websocket
