@@ -122,13 +122,12 @@ def add_to_cart(data):
     if item != "error":
         session["cart"].append(item)
 
-        # Addresses  issue of arr items getting deleted upon refresh
+        # Addresses issue of arr items getting deleted upon refresh
         # when appending to item using websocket
         session["cart"] = session["cart"]
         print(session["cart"])
     else:
         print("ADD LATER: create some error msg asking user to refresh page")
-
 
 
 @socketio.on("delete cart item")
@@ -137,7 +136,10 @@ def delete_cart_item(data):
     index = data["index"]
 
     if item != "error":
-        session["cart"].remove(item)
+        for product in session["cart"]:
+            if data["name"] == product["name"]:
+                session["cart"].remove(product)
+
         session["cart"] = session["cart"]
 
         print(session["cart"])

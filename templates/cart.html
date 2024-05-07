@@ -24,7 +24,7 @@
                                 <h3 class="cart__item-qty-title">Qty:</h3>
                                 <select name="qty" class="qty">
                                     {% set stock = item.stock | int %}
-                                    {% for i in range(0, stock + 1) %}
+                                    {% for i in range(1, stock + 1) %}
                                         <option value="{{ i }}">{{ i }}</option>
                                     {% endfor %}
                                 </select>
