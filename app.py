@@ -139,16 +139,16 @@ def add_to_cart(data):
                         product["stock"] = current_qty + 1
 
                         print("dup item found and updated")
-                        return True
                     else:
                         print("not enough stock")
+
+                    return True
             
             return False
         
-        update_dup_cart_item_qty(item)
-
-        # TODO: apply this assuming the item has no dups in cart
-        # session["cart"].append(item)
+        if update_dup_cart_item_qty(item) == False:
+            # TODO: apply this assuming the item has no dups in cart
+            session["cart"].append(item)
 
         # Addresses issue of arr items getting deleted upon refresh
         # when appending to item using websocket
