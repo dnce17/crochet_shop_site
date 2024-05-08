@@ -14,8 +14,6 @@
                         <img src="{{ item.directory }}{{ item.path }}" class="cart__item-col cart__item-col--left cart__item-img" alt="{{ item.alt }}">
                         <div class="cart__item-col cart__item-col--mid">
                             <div class="cart__item-name bold">{{ item.name }}</div>
-                            <!-- <input type="hidden" name="name" value="{{ item.name }}"> -->
-                            <!-- <input type="submit" name="delete" value="Delete" class="delete-btn"> -->
                             <button class="cart__item-delete-btn">Delete</button>
                         </div>
                         <div class="cart__item-col cart__item-col--right">
@@ -23,9 +21,21 @@
                             <div class="cart__item-qty">
                                 <h3 class="cart__item-qty-title">Qty:</h3>
                                 <select name="qty" class="qty">
-                                    {% set stock = item.stock | int %}
-                                    {% for i in range(1, stock + 1) %}
-                                        <option value="{{ i }}">{{ i }}</option>
+                                    <!-- PSEUDOCODE -->
+                                    <!-- Cycle through total stock of this ONE item -->
+                                    {% for stock_count in current_stocks %}
+                                        <!-- Match correct stock_count to current item in loop -->
+                                        {% if current_stocks.index(stock_count) == cart_items.index(item) %}
+                                            <!--Cycle through this stock count -->
+                                            {% for i in range(1, (stock_count | int) + 1) %}
+                                                <!-- If num cycled matches desired quantity, make that "selected" -->
+                                                {% if i == item["stock"] %}
+                                                    <option value="{{ i }}" selected>{{ i }}</option>
+                                                {% else %}
+                                                    <option value="{{ i }}">{{ i }}</option>
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% endif %}
                                     {% endfor %}
                                 </select>
                             </div>

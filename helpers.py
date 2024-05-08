@@ -1,11 +1,30 @@
 import csv
 from flask import request, session
 
+# REUSABLE
 def usd(value):
     """Format value as USD."""
     return f"${value:,.2f}"
 
 
+# Validate item before adding to cart
+def validate_item(path, item_name):
+    item_info = None
+
+    with open(path, "r", encoding='utf-8-sig') as f:
+        reader = csv.DictReader(f)
+        for item in reader:
+            if item_name.strip() == item["name"]:
+                item_info = item
+    
+    if item_info:
+        print("item located in db")
+        return item_info
+    else:
+        return "error"
+
+
+# SINGLE-USE (at least so far)
 def load_shop(path):
     with open(path, "r", encoding='utf-8-sig') as f:
         reader = csv.DictReader(f)
@@ -54,18 +73,23 @@ def update_shop(csv_path, header_names_arr, item_info_dict):
         writer.writerow(item_info_dict)
 
 
-# Validate item before adding to cart
-def validate_item(path, item_name):
-    item_info = None
-
-    with open(path, "r", encoding='utf-8-sig') as f:
-        reader = csv.DictReader(f)
-        for item in reader:
-            if item_name.strip() == item["name"]:
-                item_info = item
+# /cart
+def get_subtotal(session_arr):
+    """Update cart using items stored in session"""
+    subtotal = 0
+    # Calculate cart subtotal
+    for item in session_arr:
+        subtotal += float(item["price"].replace("$", ""))
     
-    if item_info:
-        print("item located in db")
-        return item_info
-    else:
-        return "error"
+    return subtotal
+
+
+def get_current_stocks(path, session_arr):
+    current_stocks = []
+
+    for item in session_arr:
+        # Get current stock of items in cart
+        current_stocks.append(validate_item(path, item["name"])["stock"])
+    
+    print("Current Stock: " + str(current_stocks))
+    return current_stocks

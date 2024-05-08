@@ -3,7 +3,7 @@ from flask_socketio import SocketIO, emit
 from flask_session import Session
 import os
 from dotenv import load_dotenv
-from helpers import load_shop, paginate, process_inventory, update_shop, usd, validate_item
+from helpers import get_current_stocks, load_shop, paginate, process_inventory, update_shop, get_subtotal, usd, validate_item
 
 SHOP_CSV_PATH = "static/shop.csv"
 SHOP_CSV_FIELDNAMES = {
@@ -70,14 +70,12 @@ def order():
 
 @app.route("/cart", methods=["GET", "POST"])
 def cart():
-    subtotal = 0
-
-    # Calculate subtotal of cart
+    print(session["cart"])
     if "cart" in session:
-        for item in session["cart"]:
-            subtotal += float(item["price"].replace("$", ""))
-            
-        return render_template("cart.html", cart_items=session["cart"], subtotal=usd(subtotal))
+        subtotal = get_subtotal(session["cart"])
+        current_stocks = get_current_stocks(SHOP_CSV_PATH, session["cart"])
+
+        return render_template("cart.html", cart_items=session["cart"], current_stocks=current_stocks, subtotal=usd(subtotal))
     
     return render_template("cart.html")
 
@@ -147,7 +145,9 @@ def add_to_cart(data):
             return False
         
         if update_dup_cart_item_qty(item) == False:
-            # TODO: apply this assuming the item has no dups in cart
+            # Set desired quantity to 1
+            item["stock"] = 1
+            # TODO: append the item if no dups in cart
             session["cart"].append(item)
 
         # Addresses issue of arr items getting deleted upon refresh
