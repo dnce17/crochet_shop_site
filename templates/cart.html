@@ -45,7 +45,10 @@
             </div>
             <div class="cart__subtotal">
                 <div class="cart__subtotal-text">
-                    <h3 class="cart__subtotal-title">Subtotal</h3>
+                    <h3 class="cart__subtotal-title">
+                        Subtotal
+                        <span class="cart__total-items">({{ total_items }} items)</span>
+                    </h3>
                     <h3 class="cart__subtotal-amt">{{ subtotal }}</h3>
                 </div>
                 <input type="submit" class="checkout-btn bold" value="Proceed to checkout">

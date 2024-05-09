@@ -3,7 +3,7 @@ from flask_socketio import SocketIO, emit
 from flask_session import Session
 import os
 from dotenv import load_dotenv
-from helpers import get_current_stocks, load_shop, paginate, process_inventory, update_shop, get_subtotal, usd, validate_item
+from helpers import get_current_stocks, load_shop, paginate, process_inventory, update_shop, get_subtotal, usd, validate_item, get_total_items
 
 SHOP_CSV_PATH = "static/shop.csv"
 SHOP_CSV_FIELDNAMES = {
@@ -74,8 +74,14 @@ def cart():
     if "cart" in session:
         subtotal = get_subtotal(session["cart"])
         current_stocks = get_current_stocks(SHOP_CSV_PATH, session["cart"])
+        total_items = get_total_items(session["cart"])
 
-        return render_template("cart.html", cart_items=session["cart"], current_stocks=current_stocks, subtotal=usd(subtotal))
+        return render_template("cart.html", 
+            cart_items=session["cart"], 
+            current_stocks=current_stocks, 
+            total_items=total_items,
+            subtotal=usd(subtotal),
+        )
     
     return render_template("cart.html")
 

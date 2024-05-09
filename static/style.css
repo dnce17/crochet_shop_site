@@ -355,6 +355,10 @@ ul {
     padding: 1em 1em;
 }
 
+.cart__total-items {
+    font-size: 1rem;
+}
+
 .checkout-btn {
     background-color: #f34f3f;
     color: white;

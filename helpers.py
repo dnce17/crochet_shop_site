@@ -93,3 +93,11 @@ def get_current_stocks(path, session_arr):
     
     print("Current Stock: " + str(current_stocks))
     return current_stocks
+
+def get_total_items(session_arr):
+    total_item = 0
+    for item in session_arr:
+        total_item += int(item["stock"])
+    
+    print(total_item)
+    return total_item
