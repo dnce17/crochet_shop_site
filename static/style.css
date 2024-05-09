@@ -357,6 +357,7 @@ ul {
 
 .cart__total-items {
     font-size: 1rem;
+    display: block;
 }
 
 .checkout-btn {

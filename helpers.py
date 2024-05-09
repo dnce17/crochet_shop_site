@@ -79,7 +79,7 @@ def get_subtotal(session_arr):
     subtotal = 0
     # Calculate cart subtotal
     for item in session_arr:
-        subtotal += float(item["price"].replace("$", ""))
+        subtotal += float(item["price"].replace("$", "")) * float(item["stock"])
     
     return subtotal
 
@@ -91,7 +91,6 @@ def get_current_stocks(path, session_arr):
         # Get current stock of items in cart
         current_stocks.append(validate_item(path, item["name"])["stock"])
     
-    print("Current Stock: " + str(current_stocks))
     return current_stocks
 
 def get_total_items(session_arr):

@@ -16,6 +16,7 @@ SHOP_CSV_FIELDNAMES = {
 }
 
 app = Flask(__name__)
+app.jinja_env.add_extension("jinja2.ext.loopcontrols")
 
 app.config["SESSION_PERMANENT"] = True
 app.config["SESSION_TYPE"] = "filesystem"
@@ -75,6 +76,10 @@ def cart():
         subtotal = get_subtotal(session["cart"])
         current_stocks = get_current_stocks(SHOP_CSV_PATH, session["cart"])
         total_items = get_total_items(session["cart"])
+
+        for item in session["cart"]:
+            print(item["name"], item["stock"])
+        print("Current Stock: " + str(current_stocks))
 
         return render_template("cart.html", 
             cart_items=session["cart"], 
@@ -181,7 +186,6 @@ def delete_cart_item(data):
         emit("delete cart item", index)
     else:
         print("ADD LATER: create some error msg asking user to refresh page")
-
 
 
 if __name__ == '__main__':
