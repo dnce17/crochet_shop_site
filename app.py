@@ -3,7 +3,7 @@ from flask_socketio import SocketIO, emit
 from flask_session import Session
 import os
 from dotenv import load_dotenv
-from helpers import get_current_stocks, load_shop, paginate, process_inventory, update_shop, get_subtotal, usd, validate_item, get_total_items
+from helpers import *
 
 SHOP_CSV_PATH = "static/shop.csv"
 SHOP_CSV_FIELDNAMES = {
@@ -129,32 +129,6 @@ def add():
 def add_to_cart(data):
     item = validate_item(SHOP_CSV_PATH, data)
     if item != "error":
-
-        def check_stock(stock, current_qty):
-            """"Check if enough stock before adding to cart"""
-            if current_qty < stock:
-                return True
-
-            return False
-
-        def update_dup_cart_item_qty(item_in_db):
-            """"Update cart item qty rather than adding new item if duplicate"""
-            for product in session["cart"]:
-                if item_in_db["name"] in product["name"]:
-                    current_qty, stock = int(product["stock"]), int(item_in_db["stock"])
-
-                    # Check if enough stock to add more qty
-                    if check_stock(stock, current_qty):
-                        product["stock"] = current_qty + 1
-
-                        print("dup item found and updated")
-                    else:
-                        print("not enough stock")
-
-                    return True
-            
-            return False
-        
         if update_dup_cart_item_qty(item) == False:
             # Set desired quantity to 1
             item["stock"] = 1

@@ -21,15 +21,10 @@
                             <div class="cart__item-qty">
                                 <h3 class="cart__item-qty-title">Qty:</h3>
                                 <select name="qty" class="qty">
-                                    <!-- PSEUDOCODE -->
                                     <!-- Cycle through total stock of this ONE item -->
                                     {% for i in range(0, (current_stocks | length)) %}
                                         {% set stock_count = current_stocks[i] | int %}
                                         <!-- Match correct stock_count to current item in loop -->
-                                        <!-- ISSUE (RESOLVED): this causes problems with items with same amt of stock b/c index search through whole arr and only -->
-                                        <!-- gives you index of first instance of dup it sees, so thats why you stuck on koromon -->
-                                        <!-- NOTE: index would be useful for arr where all items are unique -->
-                                        <!-- TEST IT NOW. IF IT WORKS, you can commit -->
                                         {% if i == cart_items.index(item) %}
                                             <!--Cycle through this stock count -->
                                             {% for k in range(1, (stock_count | int) + 1) %}

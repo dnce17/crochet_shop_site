@@ -100,3 +100,29 @@ def get_total_items(session_arr):
     
     print(total_item)
     return total_item
+
+# socket add-to-cart
+def check_stock(stock, current_qty):
+    """"Check if enough stock before adding to cart"""
+    if current_qty < stock:
+        return True
+
+    return False
+
+def update_dup_cart_item_qty(item_in_db):
+    """"Update cart item qty rather than adding new item if duplicate"""
+    for product in session["cart"]:
+        if item_in_db["name"] in product["name"]:
+            current_qty, stock = int(product["stock"]), int(item_in_db["stock"])
+
+            # Check if enough stock to add more qty
+            if check_stock(stock, current_qty):
+                product["stock"] = current_qty + 1
+
+                print("dup item found and updated")
+            else:
+                print("not enough stock")
+
+            return True
+    
+    return False

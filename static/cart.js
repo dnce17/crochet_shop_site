@@ -29,13 +29,8 @@ function updateTotalItem() {
 }
 
 function updateSubtotal(pricesList, qtysList) {
-    let cartItemNames = document.querySelectorAll(".cart__item-name");
     let newSubtotal = 0;
     for (let i = 0; i < pricesList.length; i++) {
-        console.log(i);
-        console.log(cartItemNames[i]);
-        console.log(qtysList);
-        console.log(qtysList[i]);
         newSubtotal = newSubtotal + (currencyToNum(pricesList[i].innerText) * parseInt(qtysList[i].innerText));
     }
 
