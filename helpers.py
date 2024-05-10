@@ -19,10 +19,11 @@ def validate_item(path, item_name):
                 item_info = item
     
     if item_info:
-        print("item located in db")
+        # print("item located in db")
         return item_info
     else:
         return "error"
+    
     
 def updateCartCount():
     if "cart" in session:
@@ -102,13 +103,32 @@ def get_current_stocks(path, session_arr):
     
     return current_stocks
 
+
 def get_total_items(session_arr):
     total_item = 0
     for item in session_arr:
         total_item += int(item["stock"])
     
-    print(total_item)
+    # print(total_item)
     return total_item
+
+
+def match_cart_to_shop(cart_item_dict, shop_item_dict):
+    """Check if name, price, or stock has changed. If so, update the cart item and create a msg to notify change"""
+    match_shop_name_price(cart_item_dict, shop_item_dict, "name")
+    match_shop_name_price(cart_item_dict, shop_item_dict, "price")
+    
+    # If desired qty > stock, change qty to highest available stock
+    match_shop_stock(cart_item_dict, shop_item_dict)
+    
+def match_shop_name_price(cart_item_dict, shop_item_dict, category):
+    if cart_item_dict[category].strip() != shop_item_dict[category].strip():
+        cart_item_dict[category] = shop_item_dict[category].strip()
+
+def match_shop_stock(cart_item_dict, shop_item_dict):
+    if int(cart_item_dict["stock"]) > int(shop_item_dict["stock"]):
+        cart_item_dict["stock"] = int(shop_item_dict["stock"])
+
 
 # socket add-to-cart
 def check_stock(stock, current_qty):
@@ -117,6 +137,7 @@ def check_stock(stock, current_qty):
         return True
 
     return False
+
 
 def update_dup_cart_item_qty(item_in_db):
     """"Update cart item qty rather than adding new item if duplicate"""

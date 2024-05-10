@@ -71,15 +71,18 @@ def order():
 
 @app.route("/cart", methods=["GET", "POST"])
 def cart():
-    print(session["cart"])
     if "cart" in session:
+        # Check if any changes (name, price, available stock) has been changed
+        for cart_item in session["cart"]:
+            for shop_item in load_shop(SHOP_CSV_PATH):
+                # Chose to compare img path b/c less likely to change compared to name, price, stock, if needed
+                if cart_item["path"].strip() == shop_item["path"].strip():
+                    match_cart_to_shop(cart_item, shop_item)
+
+        # Load cart item info
         subtotal = get_subtotal(session["cart"])
         current_stocks = get_current_stocks(SHOP_CSV_PATH, session["cart"])
         total_items = get_total_items(session["cart"])
-
-        for item in session["cart"]:
-            print(item["name"], item["stock"])
-        print("Current Stock: " + str(current_stocks))
 
         return render_template("cart.html", 
             cart_items=session["cart"], 
