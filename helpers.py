@@ -1,5 +1,6 @@
 import csv
 from flask import request, session
+from flask_socketio import SocketIO, emit
 
 # REUSABLE
 def usd(value):
@@ -22,6 +23,14 @@ def validate_item(path, item_name):
         return item_info
     else:
         return "error"
+    
+def updateCartCount():
+    if "cart" in session:
+        item_count = 0
+        for item in session["cart"]:
+            item_count += int(item["stock"])
+
+        emit("display cart item count", item_count)
 
 
 # SINGLE-USE (at least so far)

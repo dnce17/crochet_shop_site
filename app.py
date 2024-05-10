@@ -125,6 +125,11 @@ def add():
 
 
 # flask-socketio
+@socketio.on("display cart item count")
+def display_cart_count():
+    updateCartCount()
+
+
 @socketio.on("add to cart")
 def add_to_cart(data):
     item = validate_item(SHOP_CSV_PATH, data)
@@ -139,6 +144,8 @@ def add_to_cart(data):
         # when appending to item using websocket
         session["cart"] = session["cart"]
         print(session["cart"])
+
+        updateCartCount()
     else:
         print("ADD LATER: create some error msg asking user to refresh page")
 

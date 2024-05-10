@@ -1,5 +1,6 @@
 function main() {
     toggleNav();
+    socket.emit("display cart item count");
 
     // MOVE FUNC to a add-stock.js
     previewImg()
@@ -14,6 +15,11 @@ function toggleNav() {
         nav.classList.toggle("d-none");
     });
 }
+
+socket.on("display cart item count", function(cartCount) {
+    let amt = document.querySelector(".cart-amt");
+    amt.innerText = cartCount;
+});
 
 // MOVE FUNC to a add-stock.js
 function previewImg() {

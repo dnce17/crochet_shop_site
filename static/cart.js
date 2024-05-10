@@ -77,6 +77,7 @@ socket.on("delete cart item", function(index) {
     let subtotal = document.querySelector(".cart__subtotal-amt");
 
     deleteChild(cartItems[index]);
+    socket.emit("display cart item count");
     
     subtotal.innerText = updateCartSubtotal();
     updateCartTotalItem();
