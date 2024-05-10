@@ -28,7 +28,8 @@
                                         {% if i == cart_items.index(item) %}
                                             <!--Cycle through this stock count -->
                                             {% for k in range(1, (stock_count | int) + 1) %}
-                                                {% if k == item["stock"] %}
+                                                <!-- int added in case num is treated as str -->
+                                                {% if k == item["stock"] | int %}
                                                     <option value="{{ k }}" class="desired-qty" selected>{{ k }}</option>
                                                 {% else %}
                                                     <option value="{{ k }}">{{ k }}</option>

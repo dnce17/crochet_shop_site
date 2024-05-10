@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, session
+from flask import Flask, render_template, request, session, redirect
 from flask_socketio import SocketIO, emit
 from flask_session import Session
 import os
@@ -160,6 +160,18 @@ def delete_cart_item(data):
         emit("delete cart item", index)
     else:
         print("ADD LATER: create some error msg asking user to refresh page")
+
+
+@socketio.on("update desired qty")
+def update_desired_qty(data):
+    for item in session["cart"]:
+        if data["name"].strip() == item["name"]:
+            # CAUTION to self: Don't forget to convert str to int or else
+            # new qty not display correctly OR convert str to int in HTML itself
+            item["stock"] = int(data["newQty"])
+            session["cart"] = session["cart"]
+            
+            emit("refresh pg")
 
 
 if __name__ == '__main__':

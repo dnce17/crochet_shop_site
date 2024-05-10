@@ -19,33 +19,16 @@ function deleteCartItem() {
 function changeQty() {
     // Changes subtotal after changing qty
     let qtySelect = document.querySelectorAll(".qty");
-    let cartPrices = document.querySelectorAll(".cart__item-price");
-    let prevQty;
+    let cartItemNames = document.querySelectorAll(".cart__item-name");
 
     for (let i = 0; i < qtySelect.length; i++) {
-        // To save previous qty
-        qtySelect[i].addEventListener("click", function() {
-            // console.log(qtySelect[i].value);
-            prevQty = qtySelect[i].value;
-        });
-
         qtySelect[i].addEventListener("change", function(e) {
-            let subtotal = document.querySelector(".cart__subtotal-amt");
-            let newQty = e.target.value;
-            // console.log(newQty, prevQty);
-            
-            let operation = newQty > prevQty ? "+" : "-";
-            let qtyDiff = newQty > prevQty ? newQty - prevQty : prevQty - newQty;
-            
-            let newSubtotal = updateSubtotal(
-                currencyToNum(subtotal.innerText),
-                currencyToNum(cartPrices[i].innerText),
-                qtyDiff,
-                operation
-            );
-            
-            subtotal.innerText = "$" + newSubtotal.toFixed(2);
-        }); 
+            newQty = e.target.value;
+            socket.emit("update desired qty", {
+                "name": cartItemNames[i].innerText, 
+                "newQty": newQty
+            });
+        });
     }
 }
 
@@ -103,6 +86,10 @@ socket.on("delete cart item", function(index) {
         location.reload();
     }
 });
+
+socket.on("refresh pg", function() {
+    location.reload();
+})
 
 deleteCartItem();
 changeQty();
