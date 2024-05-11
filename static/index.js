@@ -1,5 +1,6 @@
 function main() {
     toggleNav();
+    closeMsg();
     socket.emit("display cart item count");
 
     // MOVE FUNC to a add-stock.js
@@ -14,6 +15,17 @@ function toggleNav() {
         // console.log("test");
         nav.classList.toggle("d-none");
     });
+}
+
+function closeMsg() {
+    const msgCtnr = document.querySelector(".msg-ctnr");
+    const closeBtn = document.querySelector(".remove-btn");
+
+    if (closeBtn != null) {
+        closeBtn.addEventListener("click", function() {
+            msgCtnr.classList.toggle("d-none");
+        });
+    }
 }
 
 socket.on("display cart item count", function(cartCount) {

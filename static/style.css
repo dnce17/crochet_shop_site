@@ -80,6 +80,28 @@ ul {
     padding: 5rem 0;
 }
 
+.msg-ctnr {
+    border: 2px solid #E8E8E8;
+    margin: 1rem 0 1rem 0;
+    padding: 1rem 1rem;
+    text-align: center;
+}
+
+.msg {
+    /* border: 1px solid blue; */
+    font-size: 1.125rem;
+    font-family: "Montserrat", sans-serif;
+    color: #6D6A6A;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.remove-btn {
+    border: none;
+    background-color: white;
+    text-decoration: underline;
+}
+
 .navbar {
     text-align: center;
 }
@@ -376,12 +398,6 @@ ul {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-}
-
-.cart__item-delete-btn {
-    border: none;
-    background-color: white;
-    text-decoration: underline;
 }
 
 

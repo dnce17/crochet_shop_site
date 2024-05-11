@@ -15,6 +15,9 @@ SHOP_CSV_FIELDNAMES = {
     "alt": None
 }
 
+# MSG - let users know if err or cart info change
+MSG = None
+
 app = Flask(__name__)
 app.jinja_env.add_extension("jinja2.ext.loopcontrols")
 
@@ -73,11 +76,15 @@ def order():
 def cart():
     if "cart" in session:
         # Check if any changes (name, price, available stock) has been changed
+        matched_msg = None
         for cart_item in session["cart"]:
             for shop_item in load_shop(SHOP_CSV_PATH):
                 # Chose to compare img path b/c less likely to change compared to name, price, stock, if needed
                 if cart_item["path"].strip() == shop_item["path"].strip():
-                    match_cart_to_shop(cart_item, shop_item)
+                    matched = match_cart_to_shop(cart_item, shop_item)
+
+                    if matched:
+                        matched_msg = matched
 
         # Load cart item info
         subtotal = get_subtotal(session["cart"])
@@ -89,6 +96,7 @@ def cart():
             current_stocks=current_stocks, 
             total_items=total_items,
             subtotal=usd(subtotal),
+            matched_msg=matched_msg
         )
     
     return render_template("cart.html")

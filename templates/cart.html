@@ -6,6 +6,12 @@
     {% if not cart_items %}
         <h3 class="none cart__none">No items in cart</h3>
     {% endif %}
+    {% if matched_msg %}
+        <div class="msg-ctnr">
+            <p class="msg">{{ matched_msg }}</p>
+            <button class="remove-btn">Close</button>
+        </div>
+    {% endif %}
     <section class="cart__products">
         {% if cart_items %}
             <div class="cart_info">
@@ -14,7 +20,7 @@
                         <img src="{{ item.directory }}{{ item.path }}" class="cart__item-col cart__item-col--left cart__item-img" alt="{{ item.alt }}">
                         <div class="cart__item-col cart__item-col--mid">
                             <div class="cart__item-name bold">{{ item.name }}</div>
-                            <button class="cart__item-delete-btn">Delete</button>
+                            <button class="remove-btn cart__item-delete-btn">Delete</button>
                         </div>
                         <div class="cart__item-col cart__item-col--right">
                             <div class="cart__item-price bold">{{ item.price }}</div>
