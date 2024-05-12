@@ -145,6 +145,7 @@ def display_cart_count():
 def add_to_cart(data):
     item = validate_item(SHOP_CSV_PATH, data)
     if item != "error":
+        print("success add to cart")
         if update_dup_cart_item_qty(item) == False:
             # Set desired quantity to 1
             item["stock"] = 1
@@ -159,6 +160,10 @@ def add_to_cart(data):
         updateCartCount()
     else:
         print("ADD LATER: create some error msg asking user to refresh page")
+        emit("error", {
+            "ctnr_name": ".shop",
+            "index": 0
+        })
 
 
 @socketio.on("delete cart item")
@@ -193,6 +198,12 @@ def update_desired_qty(data):
             session["cart"] = session["cart"]
             
             emit("refresh pg")
+            return True
+    
+    emit("error", {
+        "ctnr_name": ".cart",
+        "index": 1
+    })
 
 
 if __name__ == '__main__':
