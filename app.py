@@ -177,7 +177,10 @@ def delete_cart_item(data):
         print(index)
         emit("delete cart item", index)
     else:
-        print("ADD LATER: create some error msg asking user to refresh page")
+        emit("error", {
+            "ctnr_name": ".cart",
+            "index": 1
+        })
 
 
 @socketio.on("update desired qty")

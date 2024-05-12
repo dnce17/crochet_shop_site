@@ -28,9 +28,38 @@ function closeMsg() {
     }
 }
 
+function createEleWithCls(ele, clsArr) {
+    let element = document.createElement(ele);
+
+    for (let item of clsArr) {
+        element.classList.add(item);
+    }
+
+    return element
+}
+
+
 socket.on("display cart item count", function(cartCount) {
     let amt = document.querySelector(".cart-amt");
     amt.innerText = cartCount;
+});
+
+socket.on("error", function(data) {
+    let ctnr = document.querySelector(data["ctnr_name"]);
+    let errMsgCtnr = document.querySelector(".error-msg-ctnr");
+
+    if (errMsgCtnr == null) {   
+        errMsgCtnr = createEleWithCls("div", ["msg-ctnr", "error-msg-ctnr"]);
+        let errMsg = createEleWithCls("p", ["msg"]);
+
+        errMsg.innerText = "ERROR: An issue has occurred. Please refresh the page and try again.";
+        errMsgCtnr.appendChild(errMsg);
+
+        ctnr.insertBefore(errMsgCtnr, ctnr.children[data["index"]]);
+    };
+
+    // Scroll back to top of page to see err msg
+    window.scroll(0, 0);
 });
 
 // MOVE FUNC to a add-stock.js
