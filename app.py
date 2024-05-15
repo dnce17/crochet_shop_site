@@ -138,7 +138,7 @@ def add():
 # flask-socketio
 @socketio.on("display cart item count")
 def display_cart_count():
-    updateCartCount()
+    update_cart_count()
 
 
 @socketio.on("add to cart")
@@ -157,7 +157,7 @@ def add_to_cart(data):
         session["cart"] = session["cart"]
         print(session["cart"])
 
-        updateCartCount()
+        update_cart_count()
     else:
         print("ADD LATER: create some error msg asking user to refresh page")
         emit("error", {

@@ -25,7 +25,7 @@ def validate_item(path, item_name):
         return "error"
     
 
-def updateCartCount():
+def update_cart_count():
     if "cart" in session:
         item_count = 0
         for item in session["cart"]:
