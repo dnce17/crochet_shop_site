@@ -67,6 +67,8 @@ function updateSubtotal(currentSubtotal, price, qty, operation="+") {
 
 function deleteChild(ele) {
     ele.classList.toggle("deleted");
+    ele.style.display = "none";
+
     // Gets rid of children by replacing content with #text node
     ele.textContent = "";
 }
