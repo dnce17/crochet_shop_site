@@ -2,9 +2,6 @@ function main() {
     toggleNav();
     closeMsg();
     socket.emit("display cart item count");
-
-    // MOVE FUNC to a add-stock.js
-    previewImg()
 }
 
 function toggleNav() {
@@ -62,20 +59,5 @@ socket.on("error", function(data) {
     window.scroll(0, 0);
 });
 
-// MOVE FUNC to a add-stock.js
-function previewImg() {
-    let imgUpload = document.querySelector(".img-upload");
-    let imgPreview = document.querySelector(".img-preview")
-
-    imgUpload.addEventListener("change", () => {
-        let file = imgUpload.files[0]
-        if (file) {
-            imgPreview.src = URL.createObjectURL(file);
-            if (imgPreview.classList.contains("hidden")) {
-                imgPreview.classList.remove("hidden")
-            }
-        }
-    });
-}
 
 main();
