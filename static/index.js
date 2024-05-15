@@ -19,7 +19,7 @@ function toggleNav() {
 
 function closeMsg() {
     const msgCtnr = document.querySelector(".msg-ctnr");
-    const closeBtn = document.querySelector(".remove-btn");
+    const closeBtn = document.querySelector(".close-btn");
 
     if (closeBtn != null) {
         closeBtn.addEventListener("click", function() {
