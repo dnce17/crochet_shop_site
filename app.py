@@ -137,8 +137,8 @@ def add():
 
 # flask-socketio
 @socketio.on("display cart item count")
-def display_cart_count():
-    update_cart_count()
+def display_cart_count(data=None):
+    update_cart_count(data)
 
 
 @socketio.on("add to cart")
@@ -180,7 +180,11 @@ def delete_cart_item(data):
 
         print(session["cart"])
         print(index)
-        emit("delete cart item", index)
+
+        emit("delete cart item", {
+            "cart_count": get_cart_count(),
+            "index": index
+            })
     else:
         emit("error", {
             "ctnr_name": ".cart",

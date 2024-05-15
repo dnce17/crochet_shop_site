@@ -23,15 +23,22 @@ def validate_item(path, item_name):
         return item_info
     else:
         return "error"
-    
 
-def update_cart_count():
+
+def get_cart_count():
     if "cart" in session:
         item_count = 0
         for item in session["cart"]:
             item_count += int(item["stock"])
+        
+        return item_count
 
+def update_cart_count(manual_count=None):
+    item_count = get_cart_count()
+    if manual_count == None and item_count >= 0:        
         emit("display cart item count", item_count)
+    else:
+        emit("display cart item count", manual_count)
 
 
 # SINGLE-USE (at least so far)
