@@ -168,10 +168,10 @@ def update_dup_cart_item_qty(item_in_db):
             if check_stock(stock, current_qty):
                 product["stock"] = current_qty + 1
 
-                print("dup item found and updated")
+                return "dup updated"
+                # return True
             else:
-                print("not enough stock")
-
-            return True
+                return "not enough stock"
     
-    return False
+    return "no dup found"
+    # return False

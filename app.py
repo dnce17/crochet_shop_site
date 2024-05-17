@@ -145,12 +145,21 @@ def display_cart_count(data=None):
 def add_to_cart(data):
     item = validate_item(SHOP_CSV_PATH, data)
     if item != "error":
-        print("success add to cart")
-        if update_dup_cart_item_qty(item) == False:
+        outcome = update_dup_cart_item_qty(item)
+        if outcome == "no dup found":
             # Set desired quantity to 1
             item["stock"] = 1
             # TODO: append the item if no dups in cart
             session["cart"].append(item)
+
+            print("no dup found")
+            emit("successfully added to cart")
+        elif outcome == "dup updated":
+            print("dup updated")
+            emit("successfully added to cart")
+        else:
+            print("not enough stock")
+            emit("not enough stock")
 
         # Addresses issue of arr items getting deleted upon refresh
         # when appending to item using websocket
