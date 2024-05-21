@@ -1,3 +1,4 @@
+from socket import socket
 from flask import Flask, render_template, request, session, redirect
 from flask_socketio import SocketIO, emit
 from flask_session import Session
@@ -17,6 +18,9 @@ SHOP_CSV_FIELDNAMES = {
 
 # MSG - let users know if err or cart info change
 MSG = None
+
+# Server-side validation for when user selects radio option
+RADIO_OPTIONS = ["existing pattern", "own idea"]
 
 app = Flask(__name__)
 app.jinja_env.add_extension("jinja2.ext.loopcontrols")
@@ -65,6 +69,11 @@ def shop():
     pg, total_pg, items_on_pg = paginate(items, 24)
 
     return render_template("shop.html", pg=pg, total_pg=total_pg, items_on_pg=items_on_pg)
+
+
+@app.route("/request", methods=["GET", "POST"])
+def request():
+    return render_template("request.html")
 
 
 @app.route("/order", methods=["GET", "POST"])
@@ -217,6 +226,23 @@ def update_desired_qty(data):
         "ctnr_name": ".cart",
         "index": 1
     })
+
+
+@socketio.on("validate radios")
+def validate_radios(data):
+    if data not in RADIO_OPTIONS:
+        emit("error", {
+            "ctnr_name": ".request",
+            "index": 0
+        })
+    else:
+        emit("add correct request form element", data)
+
+        # TO TEST ON BIGGER SCREEN SIZE LATER
+        # emit("error", {
+        #     "ctnr_name": ".request",
+        #     "index": 0
+        # })
 
 
 if __name__ == '__main__':

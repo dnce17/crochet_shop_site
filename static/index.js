@@ -35,6 +35,32 @@ function createEleWithCls(ele, clsArr) {
     return element
 }
 
+function createLabel(clsArr, labelFor, text) {
+    let label = createEleWithCls("label", clsArr);
+    label.htmlFor = labelFor;
+    label.innerText = text;
+
+    return label;
+}
+
+function createInput(inputType, inputName, clsArr) {
+    let input = createEleWithCls("input", clsArr);
+    input.setAttribute("type", inputType);
+    input.name = inputName;
+    input.id = inputName
+
+    return input;
+}
+
+function createTextArea(textAreaName, rowCount, clsArr) {
+    let textArea = createEleWithCls("textarea", clsArr);
+    textArea.name = textAreaName;
+    textArea.id = textAreaName;
+    textArea.rows = rowCount;
+
+    return textArea;
+}
+
 
 socket.on("display cart item count", function(cartCount) {
     let amt = document.querySelector(".cart-amt");

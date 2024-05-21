@@ -1,29 +1,29 @@
 {% extends "layout.html" %}
 
 {% block main %}
-<div class="auth-hero">
-    <form action="/register" method="post" class="auth register ctnr">
-        <div class="auth__header">
+<div class="form-hero">
+    <form action="/register" method="post" class="form auth register ctnr">
+        <div class="form__header">
             <h1>Register</h1>
         </div>
-        <div class="auth__item">
-            <label for="username" class="auth__label">Username</label>
-            <input type="text" name="username" class="input auth__username" id="username" autocomplete="off">
+        <div class="form__item">
+            <label for="username" class="form__label">Username</label>
+            <input type="text" name="username" class="input form__username" id="username" autocomplete="off">
         </div>
-        <div class="auth__item">
-            <label for="email" class="auth__label">Email</label>
-            <input type="text" name="email" class="input auth__email" id="email" autocomplete="off">
+        <div class="form__item">
+            <label for="email" class="form__label">Email</label>
+            <input type="text" name="email" class="input form__email" id="email" autocomplete="off">
         </div>
-        <div class="auth__item">
-            <label for="password" class="auth__label">Password</label>
-            <input type="password" name="password" class="input auth__password" id="password" autocomplete="off">
+        <div class="form__item">
+            <label for="password" class="form__label">Password</label>
+            <input type="password" name="password" class="input form__password" id="password" autocomplete="off">
         </div>
-        <div class="auth__item">
-            <label for="confirm-password" class="auth__label">Confirm Password</label>
-            <input type="password" name="confirm-password" class="input auth__confirm" id="confirm-password" autocomplete="off">
+        <div class="form__item">
+            <label for="confirm-password" class="form__label">Confirm Password</label>
+            <input type="password" name="confirm-password" class="input form__confirm" id="confirm-password" autocomplete="off">
         </div>
-        <div class="auth__item">
-            <input type="submit" name="register" class="input auth__submit">
+        <div class="form__item">
+            <input type="submit" name="register" class="input form__submit">
         </div>
     </form>
 </div>
