@@ -17,7 +17,7 @@
     <div class="form__item form__radio-question">
         <h4 class="request__selection">Please select whether if have an existing pattern or your own idea that you want us to create.</h4>
         <div class="form__radio">
-            <input type="radio" name="option" class="form__radio-option" id="existing-pattern" value="existing pattern">
+            <input type="radio" name="option" class="form__radio-option" id="existing-pattern" value="existing pattern" checked="checked">
             <label for="existing-pattern" class="request__label">Existing Pattern</label>
         </div>
         <div class="form__radio">
@@ -25,45 +25,19 @@
             <label for="own-idea" class="request__label">Own Idea</label>
         </div>
     </div>
-    <!-- <div class="form__item form__item--disabled">
+    <!-- radio-identifer added to determine which to undisabled upon radio click -->
+    <div class="form__item radio-identifer">
         <label for="pattern-link" class="request__label">Link for an Existing Pattern</label>
-        <input type="text" name="pattern-link" class="input request__input request__input--existing-pattern" id="pattern-link" disabled>
+        <input type="text" name="pattern-link" class="input request__input request__input--existing-pattern" id="pattern-link">
     </div>
-    <div class="form__item form__item--disabled">
+    <div class="form__item form__item--disabled radio-identifer">
         <label for="idea-detail" class="request__label">Details for Own Idea</label>
         <textarea name="idea-detail" class="input request__input request__input--own-idea" id="idea-detail" rows="10" disabled></textarea>
-    </div> -->
+    </div>
     <div class="form__item">
         <input type="submit" value="Submit" class="input form__submit request__btn">
     </div>
 </form>
-<!-- <div class="form-hero">
-    <form action="#" method="post" class="form request ctnr">
-        <div class="form__header request__header">
-            <h1>Request Custom Order</h1>
-        </div>
-        <div class="form__item request__item">
-            <label for="username" class="form__label request__label">Username</label>
-            <input type="text" name="username" class="input form__username request__username" id="username" autocomplete="off">
-        </div>
-        <div class="form__item request__item">
-            <label for="email" class="form__label request__label">Email</label>
-            <input type="text" name="email" class="input form__email request__email" id="email" autocomplete="off">
-        </div>
-        <div class="form__item request__item">
-            <label for="pattern-link" class="form__label request__label">Pattern Link</label>
-            <input type="text" name="pattern-link" class="input form__pattern-link request__pattern-link" id="pattern-link" autocomplete="off">
-        </div>
-        <div class="form__item request__item">
-            <label for="pattern-detail" class="form__label request__label">Details for Desired Pattern</label>
-            <textarea name="pattern-detail" class="input form__pattern-detail request__pattern-detail" id="pattern-detail"></textarea>
-        </div>
-
-        <div class="form__item request__item">
-            <input type="submit" name="request" class="input form__submit">
-        </div>
-    </form>
-</div> -->
 {% endblock %}
 
 {% block js %}

@@ -230,13 +230,14 @@ def update_desired_qty(data):
 
 @socketio.on("validate radios")
 def validate_radios(data):
-    if data not in RADIO_OPTIONS:
+    if data["value"] not in RADIO_OPTIONS:
         emit("error", {
             "ctnr_name": ".request",
             "index": 0
         })
     else:
-        emit("add correct request form element", data)
+        emit("undisable correct request form element", data["index"])
+        # emit("add correct request form element", data)
 
         # TO TEST ON BIGGER SCREEN SIZE LATER
         # emit("error", {
