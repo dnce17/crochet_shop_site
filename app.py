@@ -1,5 +1,5 @@
 from socket import socket
-from flask import Flask, render_template, request, session, redirect
+from flask import Flask, render_template, request, session
 from flask_socketio import SocketIO, emit
 from flask_session import Session
 import os
@@ -47,10 +47,7 @@ def shop():
     # Create cart if does not exist
     if "cart" not in session:
         session["cart"] = []
-        print("New cart made")
     
-    print(session["cart"])
-
     # Load shop items from CSV file
     items = load_shop(SHOP_CSV_PATH)
 
@@ -88,7 +85,7 @@ def cart():
         matched_msg = None
         for cart_item in session["cart"]:
             for shop_item in load_shop(SHOP_CSV_PATH):
-                # Chose to compare img path b/c less likely to change compared to name, price, stock, if needed
+                # Chose to compare img path b/c less likely to change compared to name, price, stock
                 if cart_item["path"].strip() == shop_item["path"].strip():
                     matched = match_cart_to_shop(cart_item, shop_item)
 
@@ -158,26 +155,21 @@ def add_to_cart(data):
         if outcome == "no dup found":
             # Set desired quantity to 1
             item["stock"] = 1
-            # TODO: append the item if no dups in cart
+            # Append the item if no dups in cart
             session["cart"].append(item)
 
-            print("no dup found")
             emit("successfully added to cart")
         elif outcome == "dup updated":
-            print("dup updated")
             emit("successfully added to cart")
         else:
-            print("not enough stock")
             emit("not enough stock")
 
         # Addresses issue of arr items getting deleted upon refresh
         # when appending to item using websocket
         session["cart"] = session["cart"]
-        print(session["cart"])
 
         update_cart_count()
     else:
-        print("ADD LATER: create some error msg asking user to refresh page")
         emit("error", {
             "ctnr_name": ".shop",
             "index": 0
@@ -195,9 +187,6 @@ def delete_cart_item(data):
                 session["cart"].remove(product)
 
         session["cart"] = session["cart"]
-
-        print(session["cart"])
-        print(index)
 
         emit("delete cart item", {
             "cart_count": get_cart_count(),
@@ -232,18 +221,11 @@ def update_desired_qty(data):
 def validate_radios(data):
     if data["value"] not in RADIO_OPTIONS:
         emit("error", {
-            "ctnr_name": ".request",
+            "ctnr_name": ".request-hero",
             "index": 0
         })
     else:
         emit("undisable correct request form element", data["index"])
-        # emit("add correct request form element", data)
-
-        # TO TEST ON BIGGER SCREEN SIZE LATER
-        # emit("error", {
-        #     "ctnr_name": ".request",
-        #     "index": 0
-        # })
 
 
 if __name__ == '__main__':

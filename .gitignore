@@ -3,3 +3,4 @@
 __pycache__/
 .env
 flask_session
+scrapped-ideas.js

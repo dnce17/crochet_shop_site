@@ -13,4 +13,5 @@ function previewImg() {
     });
 }
 
+
 previewImg();

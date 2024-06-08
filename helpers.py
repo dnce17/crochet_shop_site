@@ -2,7 +2,6 @@ import csv
 from flask import request, session
 from flask_socketio import SocketIO, emit
 
-# REUSABLE
 def usd(value):
     """Format value as USD."""
     return f"${value:,.2f}"
@@ -19,7 +18,6 @@ def validate_item(path, item_name):
                 item_info = item
     
     if item_info:
-        # print("item located in db")
         return item_info
     else:
         return "error"
@@ -33,6 +31,7 @@ def get_cart_count():
         
         return item_count
 
+
 def update_cart_count(manual_count=None):
     item_count = get_cart_count()
     if manual_count == None and item_count >= 0:        
@@ -41,7 +40,6 @@ def update_cart_count(manual_count=None):
         emit("display cart item count", manual_count)
 
 
-# SINGLE-USE (at least so far)
 def load_shop(path):
     with open(path, "r", encoding='utf-8-sig') as f:
         reader = csv.DictReader(f)
@@ -64,6 +62,7 @@ def paginate(items, per_pg):
     return [pg, total_pg, items_on_pg]
 
 
+# /admin/add-stock
 def process_inventory(img, inputs, shop_info):
     # Save img to folder
     img.save("static/img/shop/" + img.filename)
@@ -116,7 +115,6 @@ def get_total_items(session_arr):
     for item in session_arr:
         total_item += int(item["stock"])
     
-    # print(total_item)
     return total_item
 
 
@@ -141,6 +139,7 @@ def match_shop_name_price(cart_item_dict, shop_item_dict, category):
     
     return False
 
+
 def match_shop_stock(cart_item_dict, shop_item_dict):
     if int(cart_item_dict["stock"]) > int(shop_item_dict["stock"]):
         cart_item_dict["stock"] = int(shop_item_dict["stock"])
@@ -149,7 +148,7 @@ def match_shop_stock(cart_item_dict, shop_item_dict):
     return False
 
 
-# socket add-to-cart
+# for @socketio.on("add to cart")
 def check_stock(stock, current_qty):
     """"Check if enough stock before adding to cart"""
     if current_qty < stock:
@@ -169,9 +168,7 @@ def update_dup_cart_item_qty(item_in_db):
                 product["stock"] = current_qty + 1
 
                 return "dup updated"
-                # return True
             else:
                 return "not enough stock"
     
     return "no dup found"
-    # return False

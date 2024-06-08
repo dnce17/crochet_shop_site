@@ -9,7 +9,6 @@ function toggleNav() {
     const nav = document.querySelector(".nav");
 
     navToggle.addEventListener("click", () => {
-        // console.log("test");
         nav.classList.toggle("d-none");
     });
 }

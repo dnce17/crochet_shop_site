@@ -4,7 +4,6 @@ function addToCart() {
     
     for (let i = 0; i < cartBtns.length; i++) {
         cartBtns[i].addEventListener("click", function() {
-            // console.log(items[i].innerText);
             socket.emit("add to cart", items[i].innerText)
         });
     }
@@ -39,5 +38,6 @@ socket.on("successfully added to cart", function() {
 socket.on("not enough stock", function() {
     showOutcome("shop", "outcome-msg-ctnr--no-stock", "Amount currently in your cart is the max stock available");
 });
+
 
 addToCart();

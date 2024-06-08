@@ -73,6 +73,7 @@ function deleteChild(ele) {
     ele.textContent = "";
 }
 
+
 // Sockets
 socket.on("delete cart item", function(data) {
     let cartItems = document.querySelectorAll(".cart__item");
@@ -93,6 +94,7 @@ socket.on("delete cart item", function(data) {
 socket.on("refresh pg", function() {
     location.reload();
 })
+
 
 deleteCartItem();
 changeQty();
