@@ -435,6 +435,17 @@ ul {
 }
 
 /* request.html */
+.request-hero {
+    background-image: url("img/hero-3.jpeg");
+    padding: 0;
+}
+
+.request {
+    background-color: rgba(0, 0, 0, 0.2);
+    padding: 3rem 2rem;
+    margin: 0 auto;
+}
+
 .request > * {
     display: block;
 }
@@ -477,8 +488,11 @@ ul {
     }
 
     /* request.html */
+    .request-hero {
+        padding: 2rem 0;
+    }
+    
     .request {
-        padding: 2rem;
         max-width: 600px;
     }
     
@@ -572,6 +586,11 @@ ul {
     /* shop.html */
     .shop__display {
         grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    /* request.html */
+    .request-hero {
+        padding: 2rem 0;
     }
 
     /* orders.html + cart.html */

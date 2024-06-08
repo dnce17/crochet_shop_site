@@ -1,43 +1,45 @@
 {% extends "layout.html" %}
 
 {% block main %}
-<form action="#" method="post" enctype="multipart/form-data" class="form request ctnr">
-    <div class="form__header">
-        <h1>Request Custom Order</h1>
-    </div>
-    <div class="form__item">
-        <p class="request__instruction">
-            NOTE: If you have your own idea, you will receive an email to schedule a meeting upon submission via our Google Calendar.
-        </p>
-    </div>
-    <div class="form__item">
-        <label for="email" class="request__label">Email</label>
-        <input type="email" name="email" class="input request__input" id="email">
-    </div>
-    <div class="form__item form__radio-question">
-        <h4 class="request__selection">Please select whether if have an existing pattern or your own idea that you want us to create.</h4>
-        <div class="form__radio">
-            <input type="radio" name="option" class="form__radio-option" id="existing-pattern" value="existing pattern" checked="checked">
-            <label for="existing-pattern" class="request__label">Existing Pattern</label>
+<div class="hero request-hero">
+    <form action="#" method="post" enctype="multipart/form-data" class="form request">
+        <div class="form__header">
+            <h1>Request Custom Order</h1>
         </div>
-        <div class="form__radio">
-            <input type="radio" name="option" class="form__radio-option" id="own-idea" value="own idea">
-            <label for="own-idea" class="request__label">Own Idea</label>
+        <div class="form__item">
+            <p class="request__instruction">
+                NOTE: If you have your own idea, you will receive an email to schedule a meeting upon submission via our Google Calendar.
+            </p>
         </div>
-    </div>
-    <!-- radio-identifer added to determine which to undisabled upon radio click -->
-    <div class="form__item radio-identifer">
-        <label for="pattern-link" class="request__label">Link for an Existing Pattern</label>
-        <input type="text" name="pattern-link" class="input request__input request__input--existing-pattern" id="pattern-link">
-    </div>
-    <div class="form__item form__item--disabled radio-identifer">
-        <label for="idea-detail" class="request__label">Details for Own Idea</label>
-        <textarea name="idea-detail" class="input request__input request__input--own-idea" id="idea-detail" rows="10" disabled></textarea>
-    </div>
-    <div class="form__item">
-        <input type="submit" value="Submit" class="input form__submit request__btn">
-    </div>
-</form>
+        <div class="form__item">
+            <label for="email" class="request__label">Email</label>
+            <input type="email" name="email" class="input request__input" id="email">
+        </div>
+        <div class="form__item form__radio-question">
+            <h4 class="request__selection">Please select whether if have an existing pattern or your own idea that you want us to create.</h4>
+            <div class="form__radio">
+                <input type="radio" name="option" class="form__radio-option" id="existing-pattern" value="existing pattern" checked="checked">
+                <label for="existing-pattern" class="request__label">Existing Pattern</label>
+            </div>
+            <div class="form__radio">
+                <input type="radio" name="option" class="form__radio-option" id="own-idea" value="own idea">
+                <label for="own-idea" class="request__label">Own Idea</label>
+            </div>
+        </div>
+        <!-- radio-identifer added to determine which to undisabled upon radio click -->
+        <div class="form__item radio-identifer">
+            <label for="pattern-link" class="request__label">Link for an Existing Pattern</label>
+            <input type="text" name="pattern-link" class="input request__input request__input--existing-pattern" id="pattern-link">
+        </div>
+        <div class="form__item form__item--disabled radio-identifer">
+            <label for="idea-detail" class="request__label">Details for Own Idea</label>
+            <textarea name="idea-detail" class="input request__input request__input--own-idea" id="idea-detail" rows="10" disabled></textarea>
+        </div>
+        <div class="form__item">
+            <input type="submit" value="Submit" class="input form__submit request__btn">
+        </div>
+    </form>
+</div>
 {% endblock %}
 
 {% block js %}
