@@ -41,6 +41,10 @@ ul {
     padding: 0;
 }
 
+button, select, input[type="submit"], input[type="radio"] {
+    cursor: pointer;
+}
+
 .ctnr {
     width: 85%;
     /* May change later */
