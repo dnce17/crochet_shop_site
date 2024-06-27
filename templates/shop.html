@@ -7,7 +7,7 @@
             <article class="shop__item">
                 <img src="{{ item.directory }}{{ item.path }}" class="shop__img" alt="{{ item.alt }}">
                 <h4 class="shop__img-title">{{ item.name }}</h4>
-                <h4 class="shop__img-price">{{ item.price }}</h4>
+                <h4 class="shop__img-price">${{ item.price }}</h4>
                 <button class="shop__cart-btn">Add to cart</button>
             </article>
         {% endfor %}

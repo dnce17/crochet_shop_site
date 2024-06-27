@@ -1,6 +1,7 @@
 import csv
 from flask import request, session
 from flask_socketio import SocketIO, emit
+from db_helpers import search_db, alter_db
 
 def usd(value):
     """Format value as USD."""
@@ -24,12 +25,12 @@ def validate_item(path, item_name):
 
 
 def get_cart_count():
-    if "cart" in session:
-        item_count = 0
-        for item in session["cart"]:
-            item_count += int(item["stock"])
-        
-        return item_count
+    cart = search_db("cart.db", "SELECT * FROM cart")
+    item_count = 0
+    for item in cart:
+        item_count += item["stock"]
+    
+    return item_count
 
 
 def update_cart_count(manual_count=None):
@@ -159,14 +160,14 @@ def check_stock(stock, current_qty):
 
 def update_dup_cart_item_qty(item_in_db):
     """"Update cart item qty rather than adding new item if duplicate"""
-    for product in session["cart"]:
+    cart = search_db("cart.db", "SELECT * FROM cart")
+    for product in cart:
         if item_in_db["name"] in product["name"]:
             current_qty, stock = int(product["stock"]), int(item_in_db["stock"])
 
             # Check if enough stock to add more qty
             if check_stock(stock, current_qty):
-                product["stock"] = current_qty + 1
-
+                alter_db("cart.db", "UPDATE cart SET stock = ? WHERE name = ?", (product["stock"] + 1, product["name"]))
                 return "dup updated"
             else:
                 return "not enough stock"

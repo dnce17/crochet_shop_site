@@ -2,9 +2,10 @@ from socket import socket
 from flask import Flask, render_template, request, session
 from flask_socketio import SocketIO, emit
 from flask_session import Session
-import os
 from dotenv import load_dotenv
 from helpers import *
+from db_helpers import search_db, alter_db
+import os
 
 SHOP_CSV_PATH = "static/shop.csv"
 SHOP_CSV_FIELDNAMES = {
@@ -15,6 +16,10 @@ SHOP_CSV_FIELDNAMES = {
     "path": None,
     "alt": None
 }
+
+COLUMN_NAMES = ", ".join(SHOP_CSV_FIELDNAMES.keys())
+SQL_PLACEHOLDERS = ", ".join("?" * len(SHOP_CSV_FIELDNAMES))
+DB_PATH = "cart.db"
 
 # MSG - let users know if err or cart info change
 MSG = None
@@ -29,7 +34,9 @@ app.config["SESSION_PERMANENT"] = True
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
-socketio = SocketIO(app, manage_session=False)
+# USE GEVENT WHEN DEPLOYING
+socketio = SocketIO(app, manage_session=False, async_mode="gevent")
+# socketio = SocketIO(app, manage_session=False)
 
 # Load vars from .env file
 load_dotenv()
@@ -44,7 +51,7 @@ def index():
 
 @app.route('/shop')
 def shop():
-    # Create cart if does not exist
+    # Create cart if does not exist - REMOVE LATER
     if "cart" not in session:
         session["cart"] = []
     
@@ -150,23 +157,23 @@ def display_cart_count(data=None):
 @socketio.on("add to cart")
 def add_to_cart(data):
     item = validate_item(SHOP_CSV_PATH, data)
+
     if item != "error":
         outcome = update_dup_cart_item_qty(item)
+        print(outcome)
         if outcome == "no dup found":
             # Set desired quantity to 1
             item["stock"] = 1
-            # Append the item if no dups in cart
-            session["cart"].append(item)
-
+            # Add the item to cart.db if no dups in cart
+            alter_db("cart.db", 
+                    f"INSERT INTO cart ({COLUMN_NAMES}) VALUES ({SQL_PLACEHOLDERS})", 
+                    tuple(item.values())
+            )
             emit("successfully added to cart")
         elif outcome == "dup updated":
             emit("successfully added to cart")
         else:
             emit("not enough stock")
-
-        # Addresses issue of arr items getting deleted upon refresh
-        # when appending to item using websocket
-        session["cart"] = session["cart"]
 
         update_cart_count()
     else:
