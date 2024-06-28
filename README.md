@@ -1,7 +1,10 @@
 # Responsive Crochet Shop Website
 
 ## Description
-This Flask-based project is a shop website. The options in the navigation bar are clickable and lead to other pages. I primarily made this project to further practice responsive web design and Flask after finishing [pkmn_md_site](https://github.com/dnce17/pkmn_md_site). 
+This Flask-based project is a shop website. The options in the navigation bar are clickable and lead to other pages. I primarily made this project to further practice responsive web design, Flask, and SQL after finishing [pkmn_md_site](https://github.com/dnce17/pkmn_md_site). 
+
+# Website Demo
+https://crochet-shop-site.onrender.com/
 
 ## Features
 * Shop page 
