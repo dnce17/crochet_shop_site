@@ -180,7 +180,7 @@ button, select, input[type="submit"], input[type="radio"] {
 .hero {
     background-image: url("img/hero.jpeg");
     background-position: 65% 45%;
-    padding: 9rem 0;
+    padding: 12rem 0;
 }
 
 .hero__text {
