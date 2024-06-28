@@ -35,8 +35,8 @@ app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
 # USE GEVENT WHEN DEPLOYING
-socketio = SocketIO(app, manage_session=False, async_mode="gevent")
-# socketio = SocketIO(app, manage_session=False)
+# socketio = SocketIO(app, manage_session=False, async_mode="gevent")
+socketio = SocketIO(app, manage_session=False)
 
 # Load vars from .env file
 load_dotenv()
@@ -87,10 +87,13 @@ def order():
 
 @app.route("/cart", methods=["GET", "POST"])
 def cart():
-    if "cart" in session:
+    cart = search_db("cart.db", "SELECT * FROM cart")
+    if len(cart) > 0:
         # Check if any changes (name, price, available stock) has been changed
         matched_msg = None
-        for cart_item in session["cart"]:
+        for cart_item in cart:
+            # Ensure SQL cart item price are 2 decimal places (esp. whole num prices)
+            cart_item["price"] = f'{cart_item["price"]:,.2f}'  
             for shop_item in load_shop(SHOP_CSV_PATH):
                 # Chose to compare img path b/c less likely to change compared to name, price, stock
                 if cart_item["path"].strip() == shop_item["path"].strip():
@@ -98,17 +101,28 @@ def cart():
 
                     if matched:
                         matched_msg = matched
+                        # Update cart since there is changes
+                        cart = search_db("cart.db", "SELECT * FROM cart")
+                        print(matched_msg)
 
         # Load cart item info
-        subtotal = get_subtotal(session["cart"])
-        current_stocks = get_current_stocks(SHOP_CSV_PATH, session["cart"])
-        total_items = get_total_items(session["cart"])
+        # subtotal = get_subtotal(session["cart"])
+        # current_stocks = get_current_stocks(SHOP_CSV_PATH, session["cart"])
+        # total_items = get_total_items(session["cart"])
+
+        # return render_template("cart.html", 
+        #     cart_items=session["cart"], 
+        #     current_stocks=current_stocks, 
+        #     total_items=total_items,
+        #     subtotal=usd(subtotal),
+        #     matched_msg=matched_msg
+        # )
 
         return render_template("cart.html", 
-            cart_items=session["cart"], 
-            current_stocks=current_stocks, 
-            total_items=total_items,
-            subtotal=usd(subtotal),
+            cart_items=cart, 
+            current_stocks="FILLER", 
+            total_items="FILLER",
+            subtotal="FILLER",
             matched_msg=matched_msg
         )
     

@@ -127,6 +127,15 @@ def match_cart_to_shop(cart_item_dict, shop_item_dict):
     # If desired qty > stock, change qty to highest available stock
     change_three = match_shop_stock(cart_item_dict, shop_item_dict)
 
+    # print(cart_item_dict["name"])
+    # if change_one:
+    #     print("--name has been changed to something else not above")
+    # if change_two:
+    #     print("--price has been changed")  
+    # if change_three:
+    #     print("--available stock has dropped") 
+    # print()
+
     if change_one or change_two or change_three:
         return "NOTICE: Certain items have been updated regarding quantity due to changes in stock, name, and/or price"
     else:
@@ -134,8 +143,13 @@ def match_cart_to_shop(cart_item_dict, shop_item_dict):
 
     
 def match_shop_name_price(cart_item_dict, shop_item_dict, category):
-    if cart_item_dict[category].strip() != shop_item_dict[category].strip():
-        cart_item_dict[category] = shop_item_dict[category].strip()
+    if str(cart_item_dict[category]).strip() != str(shop_item_dict[category]).strip():
+        # cart_item_dict[category] = shop_item_dict[category].strip()
+
+        alter_db("cart.db", 
+            f"UPDATE cart SET {category} = ? WHERE path = ?", 
+            (f"{shop_item_dict[category]}", shop_item_dict["path"].strip())
+        )
         return True
     
     return False
@@ -143,7 +157,12 @@ def match_shop_name_price(cart_item_dict, shop_item_dict, category):
 
 def match_shop_stock(cart_item_dict, shop_item_dict):
     if int(cart_item_dict["stock"]) > int(shop_item_dict["stock"]):
-        cart_item_dict["stock"] = int(shop_item_dict["stock"])
+        # cart_item_dict["stock"] = int(shop_item_dict["stock"])
+
+        alter_db("cart.db", 
+                "UPDATE cart SET stock = ? WHERE path = ?", 
+                (shop_item_dict["stock"], shop_item_dict["path"].strip())
+        )
         return True
 
     return False
