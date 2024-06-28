@@ -28,7 +28,7 @@ def get_cart_count():
     cart = search_db("cart.db", "SELECT * FROM cart")
     item_count = 0
     for item in cart:
-        item_count += item["stock"]
+        item_count += int(item["stock"])
     
     return item_count
 
@@ -91,32 +91,24 @@ def update_shop(csv_path, header_names_arr, item_info_dict):
 
 
 # /cart
-def get_subtotal(session_arr):
+def get_subtotal(cart_arr):
     """Update cart using items stored in session"""
     subtotal = 0
     # Calculate cart subtotal
-    for item in session_arr:
-        subtotal += float(item["price"].replace("$", "")) * float(item["stock"])
+    for item in cart_arr:
+        subtotal += float(item["price"]) * int(item["stock"])
     
-    return subtotal
+    return usd(subtotal)
 
 
-def get_current_stocks(path, session_arr):
+def get_current_stocks(path, cart_arr):
     current_stocks = []
 
-    for item in session_arr:
+    for item in cart_arr:
         # Get current stock of items in cart
         current_stocks.append(validate_item(path, item["name"])["stock"])
     
     return current_stocks
-
-
-def get_total_items(session_arr):
-    total_item = 0
-    for item in session_arr:
-        total_item += int(item["stock"])
-    
-    return total_item
 
 
 def match_cart_to_shop(cart_item_dict, shop_item_dict):

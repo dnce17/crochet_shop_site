@@ -106,23 +106,15 @@ def cart():
                         print(matched_msg)
 
         # Load cart item info
-        # subtotal = get_subtotal(session["cart"])
-        # current_stocks = get_current_stocks(SHOP_CSV_PATH, session["cart"])
-        # total_items = get_total_items(session["cart"])
-
-        # return render_template("cart.html", 
-        #     cart_items=session["cart"], 
-        #     current_stocks=current_stocks, 
-        #     total_items=total_items,
-        #     subtotal=usd(subtotal),
-        #     matched_msg=matched_msg
-        # )
+        subtotal = get_subtotal(cart)
+        current_stocks = get_current_stocks(SHOP_CSV_PATH, cart)
+        total_items = get_cart_count()
 
         return render_template("cart.html", 
             cart_items=cart, 
-            current_stocks="FILLER", 
-            total_items="FILLER",
-            subtotal="FILLER",
+            current_stocks=current_stocks, 
+            total_items=total_items,
+            subtotal=subtotal,
             matched_msg=matched_msg
         )
     
