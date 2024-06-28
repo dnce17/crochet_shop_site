@@ -51,10 +51,6 @@ def index():
 
 @app.route('/shop')
 def shop():
-    # Create cart if does not exist - REMOVE LATER
-    if "cart" not in session:
-        session["cart"] = []
-    
     # Load shop items from CSV file
     items = load_shop(SHOP_CSV_PATH)
 
@@ -103,7 +99,6 @@ def cart():
                         matched_msg = matched
                         # Update cart since there is changes
                         cart = search_db("cart.db", "SELECT * FROM cart")
-                        print(matched_msg)
 
         # Load cart item info
         subtotal = get_subtotal(cart)
@@ -166,7 +161,6 @@ def add_to_cart(data):
 
     if item != "error":
         outcome = update_dup_cart_item_qty(item)
-        print(outcome)
         if outcome == "no dup found":
             # Set desired quantity to 1
             item["stock"] = 1
@@ -197,7 +191,6 @@ def delete_cart_item(data):
 
     if item != "error":
         for product in cart:
-            print(product["name"])
             if data["name"] == product["name"]:
                 alter_db("cart.db", "DELETE FROM cart WHERE name = ?", (product["name"],))
 
@@ -214,12 +207,13 @@ def delete_cart_item(data):
 
 @socketio.on("update desired qty")
 def update_desired_qty(data):
-    for item in session["cart"]:
+    cart = search_db("cart.db", "SELECT * FROM cart")
+    for item in cart:
         if data["name"].strip() == item["name"]:
-            # CAUTION to self: Don't forget to convert str to int or else
-            # new qty not display correctly OR convert str to int in HTML itself
-            item["stock"] = int(data["newQty"])
-            session["cart"] = session["cart"]
+            alter_db("cart.db", 
+                "UPDATE cart SET stock = ? WHERE name = ?", 
+                (int(data["newQty"]), item["name"])
+            )
             
             emit("refresh pg")
             return True

@@ -98,7 +98,6 @@ def get_subtotal(cart_arr):
     for item in cart_arr:
         subtotal += float(item["price"]) * int(item["stock"])
     
-    print(subtotal)
     return usd(subtotal)
 
 
@@ -150,8 +149,6 @@ def match_shop_name_price(cart_item_dict, shop_item_dict, category):
 
 def match_shop_stock(cart_item_dict, shop_item_dict):
     if int(cart_item_dict["stock"]) > int(shop_item_dict["stock"]):
-        # cart_item_dict["stock"] = int(shop_item_dict["stock"])
-
         alter_db("cart.db", 
                 "UPDATE cart SET stock = ? WHERE path = ?", 
                 (shop_item_dict["stock"], shop_item_dict["path"].strip())
