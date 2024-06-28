@@ -193,13 +193,13 @@ def add_to_cart(data):
 def delete_cart_item(data):
     item = validate_item(SHOP_CSV_PATH, data["name"])
     index = data["index"]
+    cart = search_db("cart.db", "SELECT * FROM cart")
 
     if item != "error":
-        for product in session["cart"]:
+        for product in cart:
+            print(product["name"])
             if data["name"] == product["name"]:
-                session["cart"].remove(product)
-
-        session["cart"] = session["cart"]
+                alter_db("cart.db", "DELETE FROM cart WHERE name = ?", (product["name"],))
 
         emit("delete cart item", {
             "cart_count": get_cart_count(),

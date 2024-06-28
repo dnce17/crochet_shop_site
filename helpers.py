@@ -98,6 +98,7 @@ def get_subtotal(cart_arr):
     for item in cart_arr:
         subtotal += float(item["price"]) * int(item["stock"])
     
+    print(subtotal)
     return usd(subtotal)
 
 

@@ -58,10 +58,10 @@ function updateCartSubtotal() {
 
 function updateSubtotal(currentSubtotal, price, qty, operation="+") {
     if (operation == "+") {
-        return currentSubtotal + (parseInt(price) * parseInt(qty));
+        return currentSubtotal + (parseFloat(price) * parseInt(qty));
     }
     else if (operation == "-") {
-        return currentSubtotal - (parseInt(price) * parseInt(qty));
+        return currentSubtotal - (parseFloat(price) * parseInt(qty));
     }
 }
 

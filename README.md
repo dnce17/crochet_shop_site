@@ -28,3 +28,4 @@ This Flask-based project is a shop website. The options in the navigation bar ar
     * https://www.geeksforgeeks.org/how-to-use-flask-session-in-python-flask/
     * https://www.geeksforgeeks.org/how-to-align-an-element-to-bottom-with-flexbox-in-css/
     * https://stackoverflow.com/questions/3955229/remove-all-child-elements-of-a-dom-node-in-javascript
+    * https://stackoverflow.com/questions/16856647/sqlite3-programmingerror-incorrect-number-of-bindings-supplied-the-current-sta
