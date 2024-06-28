@@ -2,6 +2,15 @@ function currencyToNum(value) {
     return parseFloat(value.replace("$", ""));
 }
 
+function deleteAllCartItems() {
+    let deleteAllBtn = document.querySelector(".remove-all-btn");
+    if (deleteAllBtn) {
+        deleteAllBtn.addEventListener("click", function() {
+            socket.emit("delete all cart");
+        });
+    }
+}
+
 function deleteCartItem() {
     let deleteBtns = document.querySelectorAll(".cart__item-delete-btn");
     let cartItemNames = document.querySelectorAll(".cart__item-name");
@@ -96,5 +105,6 @@ socket.on("refresh pg", function() {
 })
 
 
+deleteAllCartItems();
 deleteCartItem();
 changeQty();

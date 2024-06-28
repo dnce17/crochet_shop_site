@@ -9,7 +9,7 @@ def search_db(db_name, action):
     return [dict(item) for item in db.fetchall()]
 
 
-def alter_db(db_name, action, tup):
+def alter_db(db_name, action, tup=()):
     connect = sqlite3.connect(db_name)
     db = connect.cursor()
     db.execute(action, tup)

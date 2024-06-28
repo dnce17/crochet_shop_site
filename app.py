@@ -34,9 +34,8 @@ app.config["SESSION_PERMANENT"] = True
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
-# USE GEVENT WHEN DEPLOYING
-# socketio = SocketIO(app, manage_session=False, async_mode="gevent")
-socketio = SocketIO(app, manage_session=False)
+# Uses gevent when deploying
+socketio = SocketIO(app, manage_session=False, async_mode="gevent")
 
 # Load vars from .env file
 load_dotenv()
@@ -203,6 +202,12 @@ def delete_cart_item(data):
             "ctnr_name": ".cart",
             "index": 1
         })
+
+
+@socketio.on("delete all cart")
+def delete_all_cart():
+    alter_db("cart.db", "DELETE FROM cart")
+    emit("refresh pg")
 
 
 @socketio.on("update desired qty")

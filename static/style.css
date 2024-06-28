@@ -133,7 +133,7 @@ button, select, input[type="submit"], input[type="radio"] {
     background-color: rgb(248, 144, 144);
 }
 
-.remove-btn {
+.remove-btn, .remove-all-btn {
     border: none;
     background-color: inherit;
     text-decoration: underline;
