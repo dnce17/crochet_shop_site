@@ -56,8 +56,8 @@ def shop():
     # Placeholders used to show how shop.html looks; will leave in for display purposes
     for _ in range(0, 100):
         placeholder = {
-            'name': 'PLACEHOLDER', 
-            'price': '$??.??', 
+            'name': 'PLACEHOLDER (unaddable)', 
+            'price': '??.??', 
             'stock': '1', 
             'directory': '', 
             'path': 'https://placehold.co/330x330',
