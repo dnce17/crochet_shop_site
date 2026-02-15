@@ -34,8 +34,7 @@ app.config["SESSION_PERMANENT"] = True
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
-# Uses gevent for deployment
-socketio = SocketIO(app, manage_session=False, async_mode="gevent")
+socketio = SocketIO(app, manage_session=False)
 
 # Load vars from .env file
 load_dotenv()
