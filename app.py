@@ -21,7 +21,7 @@ COLUMN_NAMES = ", ".join(SHOP_CSV_FIELDNAMES.keys())
 SQL_PLACEHOLDERS = ", ".join("?" * len(SHOP_CSV_FIELDNAMES))
 DB_PATH = "cart.db"
 
-# MSG - let users know if err or cart info change
+# Used to let users know if error or cart info changed
 MSG = None
 
 # Server-side validation for when user selects radio option
@@ -34,7 +34,7 @@ app.config["SESSION_PERMANENT"] = True
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
-# Uses gevent when deploying
+# Uses gevent for deployment
 socketio = SocketIO(app, manage_session=False, async_mode="gevent")
 
 # Load vars from .env file
@@ -50,7 +50,7 @@ def index():
 
 @app.route('/shop')
 def shop():
-    # Load shop items from CSV file
+    """Load shop items from CSV file"""
     items = load_shop(SHOP_CSV_PATH)
 
     # Placeholders used to show how shop.html looks; will leave in for display purposes
@@ -70,9 +70,9 @@ def shop():
     return render_template("shop.html", pg=pg, total_pg=total_pg, items_on_pg=items_on_pg)
 
 
-@app.route("/request", methods=["GET", "POST"])
-def request():
-    return render_template("request.html")
+@app.route("/custom_request", methods=["GET", "POST"])
+def custom_request():
+    return render_template("custom_request.html")
 
 
 @app.route("/order", methods=["GET", "POST"])
@@ -84,7 +84,7 @@ def order():
 def cart():
     cart = search_db("cart.db", "SELECT * FROM cart")
     if len(cart) > 0:
-        # Check if any changes (name, price, available stock) has been changed
+        # Check if any changes (name, price, available stock) was made
         matched_msg = None
         for cart_item in cart:
             # Ensure SQL cart item price are 2 decimal places (esp. whole num prices)
@@ -125,9 +125,11 @@ def login():
     return render_template("login.html")
 
 
-# Will consider making it only accessible by admin later on
+# NOTE: As this shop is a prototype, this route is accessible to anyone
+# In a production app, access should be restricted to admin users
 @app.route('/admin/add-stock', methods=["GET", "POST"])
 def add():
+    """Add a new item to the shop"""
     if request.method == "POST":
         # Error checking
         img = request.files["img"]
@@ -148,7 +150,7 @@ def add():
     return render_template("add-stock.html")
 
 
-# flask-socketio
+# flask-socketio section
 @socketio.on("display cart item count")
 def display_cart_count(data=None):
     update_cart_count(data)

@@ -10,6 +10,7 @@ def usd(value):
 
 # Validate item before adding to cart
 def validate_item(path, item_name):
+    """Validate item before adding to cart"""
     item_info = None
 
     with open(path, "r", encoding='utf-8-sig') as f:
@@ -57,14 +58,15 @@ def paginate(items, per_pg):
     end = start + per_pg
     total_pg = (len(items) + per_pg - 1) // per_pg
 
-    # Recall it's 0-indexed
+    # NOTE: Recall it's 0-indexed
     items_on_pg = items[start:end]
 
     return [pg, total_pg, items_on_pg]
 
 
-# /admin/add-stock
 def process_inventory(img, inputs, shop_info):
+    """Finalizes item info before /admin/add-stock route adds it to database"""
+
     # Save img to folder
     img.save("static/img/shop/" + img.filename)
 
@@ -72,7 +74,7 @@ def process_inventory(img, inputs, shop_info):
     for key, value in inputs.items():
         shop_info[key] = value
     
-    # Create path to img and turn price into currency format
+    # Create path for img and convert price into currency format
     shop_info["path"] = "img/shop/" + img.filename
     shop_info["price"] = usd(float(shop_info["price"]))
 
@@ -90,11 +92,9 @@ def update_shop(csv_path, header_names_arr, item_info_dict):
         writer.writerow(item_info_dict)
 
 
-# /cart
 def get_subtotal(cart_arr):
-    """Update cart using items stored in session"""
+    """Calculate cart subtotal"""
     subtotal = 0
-    # Calculate cart subtotal
     for item in cart_arr:
         subtotal += float(item["price"]) * int(item["stock"])
     
@@ -102,30 +102,31 @@ def get_subtotal(cart_arr):
 
 
 def get_current_stocks(path, cart_arr):
+    """Get current stock of items in cart"""
     current_stocks = []
 
     for item in cart_arr:
-        # Get current stock of items in cart
         current_stocks.append(validate_item(path, item["name"])["stock"])
     
     return current_stocks
 
 
 def match_cart_to_shop(cart_item_dict, shop_item_dict):
-    """Check if name, price, or stock has changed. If so, update the cart item and create a msg to notify change"""
-    change_one = match_shop_name_price(cart_item_dict, shop_item_dict, "name")
-    change_two = match_shop_name_price(cart_item_dict, shop_item_dict, "price")
+    """Check if name, price, or stock has changed. If so, update the cart item and create a msg to notify user of change"""
+    changed_name = match_shop_field(cart_item_dict, shop_item_dict, "name")
+    changed_price = match_shop_field(cart_item_dict, shop_item_dict, "price")
     
     # If desired qty > stock, change qty to highest available stock
-    change_three = match_shop_stock(cart_item_dict, shop_item_dict)
+    changed_stock = match_shop_stock(cart_item_dict, shop_item_dict)
 
-    if change_one or change_two or change_three:
+    if changed_name or changed_price or changed_stock:
         return "NOTICE: Certain items have been updated regarding quantity due to changes in stock, name, and/or price"
     else:
         return None
 
-    
-def match_shop_name_price(cart_item_dict, shop_item_dict, category):
+
+# Currently, this is only used for item (1) name (2) price 
+def match_shop_field(cart_item_dict, shop_item_dict, category):
     if str(cart_item_dict[category]).strip() != str(shop_item_dict[category]).strip():
         # cart_item_dict[category] = shop_item_dict[category].strip()
 
@@ -149,7 +150,6 @@ def match_shop_stock(cart_item_dict, shop_item_dict):
     return False
 
 
-# for @socketio.on("add to cart")
 def check_stock(stock, current_qty):
     """"Check if enough stock before adding to cart"""
     if current_qty < stock:
@@ -159,13 +159,13 @@ def check_stock(stock, current_qty):
 
 
 def update_dup_cart_item_qty(item_in_db):
-    """"Update cart item qty rather than adding new item if duplicate"""
+    """"If item already in cart, update the qty rather than adding it as new item"""
     cart = search_db("cart.db", "SELECT * FROM cart")
     for product in cart:
         if item_in_db["name"] in product["name"]:
             current_qty, stock = int(product["stock"]), int(item_in_db["stock"])
 
-            # Check if enough stock to add more qty
+            # Check if enough stock before updating qty
             if check_stock(stock, current_qty):
                 alter_db("cart.db", "UPDATE cart SET stock = ? WHERE name = ?", (product["stock"] + 1, product["name"]))
                 return "dup updated"

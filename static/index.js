@@ -1,4 +1,4 @@
-function main() {
+function initPage() {
     toggleNav();
     closeMsg();
     socket.emit("display cart item count");
@@ -85,4 +85,4 @@ socket.on("error", function(data) {
 });
 
 
-main();
+initPage();

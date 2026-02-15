@@ -438,7 +438,7 @@ button, select, input[type="submit"], input[type="radio"] {
     justify-content: space-between;
 }
 
-/* request.html */
+/* custom_request.html */
 .request-hero {
     background-image: url("img/hero-3.jpeg");
     padding: 0;
@@ -492,7 +492,7 @@ button, select, input[type="submit"], input[type="radio"] {
         height: fit-content;
     }
 
-    /* request.html */
+    /* custom_request.html */
     .request-hero {
         padding: 2rem 0;
     }
@@ -593,7 +593,7 @@ button, select, input[type="submit"], input[type="radio"] {
         grid-template-columns: repeat(4, minmax(0, 1fr));
     }
 
-    /* request.html */
+    /* custom_request.html */
     .request-hero {
         padding: 2rem 0;
     }

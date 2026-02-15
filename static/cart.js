@@ -83,7 +83,6 @@ function deleteChild(ele) {
 }
 
 
-// Sockets
 socket.on("delete cart item", function(data) {
     let cartItems = document.querySelectorAll(".cart__item");
     let subtotal = document.querySelector(".cart__subtotal-amt");

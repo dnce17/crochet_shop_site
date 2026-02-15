@@ -14,6 +14,6 @@ def alter_db(db_name, action, tup=()):
     db = connect.cursor()
     db.execute(action, tup)
 
-    # Needed to make changes permanent after page refresh
+    # Makes changes permanent after page refresh
     connect.commit()
     connect.close()
