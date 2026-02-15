@@ -128,8 +128,6 @@ def match_cart_to_shop(cart_item_dict, shop_item_dict):
 # Currently, this is only used for item (1) name (2) price 
 def match_shop_field(cart_item_dict, shop_item_dict, category):
     if str(cart_item_dict[category]).strip() != str(shop_item_dict[category]).strip():
-        # cart_item_dict[category] = shop_item_dict[category].strip()
-
         alter_db("cart.db", 
             f"UPDATE cart SET {category} = ? WHERE path = ?", 
             (f"{shop_item_dict[category]}", shop_item_dict["path"].strip())
