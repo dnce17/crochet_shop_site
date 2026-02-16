@@ -1,4 +1,5 @@
 # Crochet Shop Application
+<a id="readme-top"></a>
 
 <!-- TABLE OF CONTENTS -->
 <details>
@@ -31,10 +32,6 @@ The Crochet Shop web app is a functional prototype e-commerce platform designed 
 While it doesn’t yet include features like checkout, user accounts, or payment integration, the app demonstrates the core shopping experience and responsive design for both desktop and mobile devices.
 
 The idea for this project came from a friend who hopes to start a crochet business in the future. I built this prototype app for her, should she wish to use it as a starting point for her online shop.
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
 
 ### Demo
 - **Live Demo:** [View app](https://crochet-shop-site.onrender.com/)  
