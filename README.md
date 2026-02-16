@@ -7,6 +7,7 @@
     <li>
       <a href="#about">About</a>
       <ul>
+        <li><a href="#demo">Demo</a></li>
         <li><a href="#built-with">Built With</a></li>
       </ul>
     </li>
@@ -14,21 +15,12 @@
       <a href="#installation---getting-started">Installation - Getting Started</a>
     </li>
     <li><a href="#current-features">Current Features</a></li>
-    <li>
-      <a href="#screenshots-of-application">Screenshots of Application</a>
-      <ul>
-        <li><a href="#home">Home</a></li>
-        <li><a href="#shop">Shop</a></li>
-        <li><a href="#login">Login</a></li>
-        <li><a href="#custom-request">Custom Request</a></li>
-        <li><a href="#check-order">Check Order</a></li>
-        <li><a href="#cart">Cart</a></li>
-      </ul>
-    </li>
     <li><a href="#future-improvements">Future Improvements</a></li>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
 </details>
+
+
 
 
 
