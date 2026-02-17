@@ -94,7 +94,7 @@ To get a local copy up and running, follow these steps:
    ```sh
    source .venv/bin/activate
    ```
-6. Install the required packages
+5. Install the required packages
    ```sh
    pip install -r requirements.txt
    ```
