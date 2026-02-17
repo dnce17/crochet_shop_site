@@ -35,7 +35,7 @@ The idea for this project came from a friend who hopes to start a crochet busine
 
 ### Demo
 - **Live Demo:** [View app](https://crochet-shop-site.onrender.com/)  
-   - **NOTE: Uses free tier, so may take a few seconds to 1 minute for the initial load**. If waiting for the live demo might be inconvenient, feel free to view the video or expand the screenshots below.
+   - **NOTE: Hosting uses free tier, so may take a few seconds to 1 minute for the initial load**. If waiting for the live demo might be inconvenient, feel free to view the video or expand the screenshots below.
 - **Video Demo:** [Watch a walkthrough](https://github.com/user-attachments/assets/5581fae1-de47-4963-b3bb-6160cd4d939b)
 
 - **Screenshot Demo**:
