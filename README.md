@@ -48,8 +48,9 @@ The idea for this project came from a friend who hopes to start a crochet busine
    ### Shop
    ![shop page](README_imgs/shop.png)
 
-   ### Login
+   ### Login & Sign Up
    ![login page](README_imgs/login.png)
+   ![sign up page](README_imgs/sign_up.png)
 
    ### Custom Request
    ![custom request page](README_imgs/custom_request.png)
